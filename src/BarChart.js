@@ -5,13 +5,3 @@ export default class BarChart extends Chart {
         super(title)
     }
 }
-
-
-// Example code:
-const chart = new BarChart("My Bar Chart");
-chart.addData({ Apples: 10, Bananas: 7, Oranges: 15 });
-
-console.log(chart.getData());
-
-
-
