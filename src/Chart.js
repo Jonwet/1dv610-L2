@@ -21,6 +21,7 @@ export default class Chart {
             this.#data.push({ label, value })
         }
     }
+
     getData() {
         return this.#data
     }
