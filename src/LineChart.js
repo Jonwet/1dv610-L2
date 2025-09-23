@@ -5,5 +5,5 @@ export default class LineChart extends Chart {
         super(title)
     }
 
-
+    
 }
