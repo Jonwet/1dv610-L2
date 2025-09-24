@@ -11,4 +11,12 @@ export default class LineChart extends Chart {
     addSeries(name, data) {
         this.#series[name] = [...data]
     }
+
+    getSeries() {
+        const copyOfSeries = {}
+        for (const [name, data] of Object.entries(this.#series)) {
+            copyOfSeries[name] = [...data]
+        }
+        return copyOfSeries
+    }
 }
