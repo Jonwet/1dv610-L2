@@ -1,0 +1,14 @@
+"filename", "language", "JavaScript", "Markdown", "JSON", "comment", "blank", "total"
+"c:\Users\jonat\lnu_åk2\1dv610\1dv610-L2\README.md", "Markdown", 0, 1, 0, 0, 0, 1
+"c:\Users\jonat\lnu_åk2\1dv610\1dv610-L2\index.js", "JavaScript", 1, 0, 0, 0, 0, 1
+"c:\Users\jonat\lnu_åk2\1dv610\1dv610-L2\jest.config.js", "JavaScript", 4, 0, 0, 0, 0, 4
+"c:\Users\jonat\lnu_åk2\1dv610\1dv610-L2\package-lock.json", "JSON", 0, 0, 4412, 0, 1, 4413
+"c:\Users\jonat\lnu_åk2\1dv610\1dv610-L2\package.json", "JSON", 0, 0, 23, 0, 1, 24
+"c:\Users\jonat\lnu_åk2\1dv610\1dv610-L2\src\BarChart.js", "JavaScript", 6, 0, 0, 0, 2, 8
+"c:\Users\jonat\lnu_åk2\1dv610\1dv610-L2\src\Chart.js", "JavaScript", 29, 0, 0, 0, 7, 36
+"c:\Users\jonat\lnu_åk2\1dv610\1dv610-L2\src\LineChart.js", "JavaScript", 17, 0, 0, 1, 4, 22
+"c:\Users\jonat\lnu_åk2\1dv610\1dv610-L2\src\PieChart.js", "JavaScript", 20, 0, 0, 1, 9, 30
+"c:\Users\jonat\lnu_åk2\1dv610\1dv610-L2\test\BarChart.test.js", "JavaScript", 11, 0, 0, 0, 3, 14
+"c:\Users\jonat\lnu_åk2\1dv610\1dv610-L2\test\Chart.test.js", "JavaScript", 17, 0, 0, 0, 8, 25
+"c:\Users\jonat\lnu_åk2\1dv610\1dv610-L2\test\PieChart.test.js", "JavaScript", 0, 0, 0, 0, 1, 1
+"Total", "-", 105, 1, 4435, 2, 36, 4579

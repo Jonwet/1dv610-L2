@@ -3,12 +3,14 @@ export default class Chart {
     #data
 
     constructor(title = "Untitled Chart") {
+        this.#validateTitle(title)
         this.#title = title
         this.#data = []
 
     }
 
     setTitle(title) {
+        this.#validateTitle(title)
         this.#title = title
     }
 
@@ -24,5 +26,11 @@ export default class Chart {
 
     getData() {
         return this.#data
+    }
+
+    #validateTitle(title) {
+        if (typeof title !== "string" || title.trim() === "") {
+            throw new Error("Title must be a non-empty string")
+        }
     }
 }
