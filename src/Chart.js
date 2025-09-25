@@ -19,7 +19,17 @@ export default class Chart {
     }
 
     addData(newData) {
+        if (typeof newData !== "object" || newData === null || Array.isArray(newData)) {
+            throw new Error("Data must be a non-null object")
+        }
+
         for (const [label, value] of Object.entries(newData)) {
+            if (typeof label !== "string" || label.trim() === "") {
+                throw new Error("Data labels must be non-empty strings")
+            }
+            if (typeof value !== "number" || isNaN(value)) {
+                throw new Error("Data values must be numbers")
+            }
             this.#data.push({ label, value })
         }
     }
