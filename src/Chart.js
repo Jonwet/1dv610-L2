@@ -18,6 +18,8 @@ export default class Chart {
         return this.#title
     }
 
+
+    // Bryt ut validator?
     addData(newData) {
         if (typeof newData !== "object" || newData === null || Array.isArray(newData)) {
             throw new Error("Data must be a non-null object")

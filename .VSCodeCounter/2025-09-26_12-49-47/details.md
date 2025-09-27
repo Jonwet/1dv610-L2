@@ -1,10 +1,10 @@
 # Details
 
-Date : 2025-09-23 15:34:27
+Date : 2025-09-26 12:49:47
 
 Directory c:\\Users\\jonat\\lnu_åk2\\1dv610\\1dv610-L2
 
-Total : 12 files,  4519 codes, 0 comments, 29 blanks, all 4548 lines
+Total : 12 files,  4548 codes, 2 comments, 32 blanks, all 4582 lines
 
 [Summary](results.md) / Details / [Diff Summary](diff.md) / [Diff Details](diff-details.md)
 
@@ -16,10 +16,10 @@ Total : 12 files,  4519 codes, 0 comments, 29 blanks, all 4548 lines
 | [jest.config.js](/jest.config.js) | JavaScript | 4 | 0 | 0 | 4 |
 | [package-lock.json](/package-lock.json) | JSON | 4,412 | 0 | 1 | 4,413 |
 | [package.json](/package.json) | JSON | 23 | 0 | 1 | 24 |
-| [src/BarChart.js](/src/BarChart.js) | JavaScript | 6 | 0 | 2 | 8 |
-| [src/Chart.js](/src/Chart.js) | JavaScript | 22 | 0 | 6 | 28 |
-| [src/LineChart.js](/src/LineChart.js) | JavaScript | 6 | 0 | 3 | 9 |
-| [src/PieChart.js](/src/PieChart.js) | JavaScript | 16 | 0 | 4 | 20 |
+| [src/BarChart.js](/src/BarChart.js) | JavaScript | 8 | 0 | 2 | 10 |
+| [src/Chart.js](/src/Chart.js) | JavaScript | 38 | 1 | 9 | 48 |
+| [src/LineChart.js](/src/LineChart.js) | JavaScript | 17 | 1 | 4 | 22 |
+| [src/PieChart.js](/src/PieChart.js) | JavaScript | 16 | 0 | 3 | 19 |
 | [test/BarChart.test.js](/test/BarChart.test.js) | JavaScript | 11 | 0 | 3 | 14 |
 | [test/Chart.test.js](/test/Chart.test.js) | JavaScript | 17 | 0 | 8 | 25 |
 | [test/PieChart.test.js](/test/PieChart.test.js) | JavaScript | 0 | 0 | 1 | 1 |

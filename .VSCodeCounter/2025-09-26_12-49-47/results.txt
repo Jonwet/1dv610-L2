@@ -1,0 +1,41 @@
+Date : 2025-09-26 12:49:47
+Directory : c:\Users\jonat\lnu_åk2\1dv610\1dv610-L2
+Total : 12 files,  4548 codes, 2 comments, 32 blanks, all 4582 lines
+
+Languages
++------------+------------+------------+------------+------------+------------+
+| language   | files      | code       | comment    | blank      | total      |
++------------+------------+------------+------------+------------+------------+
+| JSON       |          2 |      4,435 |          0 |          2 |      4,437 |
+| JavaScript |          9 |        112 |          2 |         30 |        144 |
+| Markdown   |          1 |          1 |          0 |          0 |          1 |
++------------+------------+------------+------------+------------+------------+
+
+Directories
++---------------------------------------------------------------+------------+------------+------------+------------+------------+
+| path                                                          | files      | code       | comment    | blank      | total      |
++---------------------------------------------------------------+------------+------------+------------+------------+------------+
+| .                                                             |         12 |      4,548 |          2 |         32 |      4,582 |
+| . (Files)                                                     |          5 |      4,441 |          0 |          2 |      4,443 |
+| src                                                           |          4 |         79 |          2 |         18 |         99 |
+| test                                                          |          3 |         28 |          0 |         12 |         40 |
++---------------------------------------------------------------+------------+------------+------------+------------+------------+
+
+Files
++---------------------------------------------------------------+------------+------------+------------+------------+------------+
+| filename                                                      | language   | code       | comment    | blank      | total      |
++---------------------------------------------------------------+------------+------------+------------+------------+------------+
+| c:\Users\jonat\lnu_åk2\1dv610\1dv610-L2\README.md             | Markdown   |          1 |          0 |          0 |          1 |
+| c:\Users\jonat\lnu_åk2\1dv610\1dv610-L2\index.js              | JavaScript |          1 |          0 |          0 |          1 |
+| c:\Users\jonat\lnu_åk2\1dv610\1dv610-L2\jest.config.js        | JavaScript |          4 |          0 |          0 |          4 |
+| c:\Users\jonat\lnu_åk2\1dv610\1dv610-L2\package-lock.json     | JSON       |      4,412 |          0 |          1 |      4,413 |
+| c:\Users\jonat\lnu_åk2\1dv610\1dv610-L2\package.json          | JSON       |         23 |          0 |          1 |         24 |
+| c:\Users\jonat\lnu_åk2\1dv610\1dv610-L2\src\BarChart.js       | JavaScript |          8 |          0 |          2 |         10 |
+| c:\Users\jonat\lnu_åk2\1dv610\1dv610-L2\src\Chart.js          | JavaScript |         38 |          1 |          9 |         48 |
+| c:\Users\jonat\lnu_åk2\1dv610\1dv610-L2\src\LineChart.js      | JavaScript |         17 |          1 |          4 |         22 |
+| c:\Users\jonat\lnu_åk2\1dv610\1dv610-L2\src\PieChart.js       | JavaScript |         16 |          0 |          3 |         19 |
+| c:\Users\jonat\lnu_åk2\1dv610\1dv610-L2\test\BarChart.test.js | JavaScript |         11 |          0 |          3 |         14 |
+| c:\Users\jonat\lnu_åk2\1dv610\1dv610-L2\test\Chart.test.js    | JavaScript |         17 |          0 |          8 |         25 |
+| c:\Users\jonat\lnu_åk2\1dv610\1dv610-L2\test\PieChart.test.js | JavaScript |          0 |          0 |          1 |          1 |
+| Total                                                         |            |      4,548 |          2 |         32 |      4,582 |
++---------------------------------------------------------------+------------+------------+------------+------------+------------+

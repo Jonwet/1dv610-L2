@@ -1,6 +1,6 @@
 # Diff Details
 
-Date : 2025-09-23 12:57:21
+Date : 2025-09-27 13:45:12
 
 Directory c:\\Users\\jonat\\lnu_åk2\\1dv610\\1dv610-L2
 
