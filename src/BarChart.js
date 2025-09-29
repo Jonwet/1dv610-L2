@@ -7,7 +7,13 @@ export default class BarChart extends Chart {
 
     sortByValue(descending = true) {
         const sortedData = [...this.getData()]
-        sortedData.sort((a, b) => descending ? b.value - a.value : a.value - b.value)
+        sortedData.sort(function(a, b) {
+            if (descending) {
+                return b.value - a.value
+            } else {
+                return a.value - b.value
+            }
+        })
         return sortedData
     }
 
@@ -15,15 +21,27 @@ export default class BarChart extends Chart {
         const data = this.getData()
         if (data.length === 0) return []
 
-        const maxValue = Math.max(...data.map(entry => entry.value))
-        return data.filter(entry => entry.value === maxValue)
+        const value = data.map(function(entry) { 
+            return entry.value 
+        })
+        const maxValue = Math.max(...value)
+
+        return data.filter(function(entry) { 
+            return entry.value === maxValue 
+        })
     }
 
     getMinBar() {
         const data = this.getData()
         if (data.length === 0) return []
 
-        const minValue = Math.min(...data.map(entry => entry.value))
-        return data.filter(entry => entry.value === minValue)
+        const value = data.map(function(entry) { 
+            return entry.value 
+        })
+        const minValue = Math.min(...value)
+
+        return data.filter(function(entry) { 
+            return entry.value === minValue 
+        })
     }
 }
