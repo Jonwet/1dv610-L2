@@ -39,7 +39,26 @@ test("PieChart can calculate vote percentages", () => {
 
 test("PieChart can identify slice with maximum value", () => {
   const pieChart = new TestPieChart("Test Pie Chart")
-  pieChart.addData({ Apples: 10, Bananas: 7, Cherries: 15 })
-  expect(pieChart.getMaxValue()).toEqual([{ label: 'Cherries', value: 15 }])
-  console.log(pieChart.getMaxValue())
+  pieChart.addData({ Apples: 10, Bananas: 15, Cherries: 7 })
+  expect(pieChart.getLargestSlice()).toEqual([{ label: "Bananas", value: 15 }])
+  console.log(pieChart.getLargestSlice())
+})
+
+test("PieChart can identify slice with minimum value", () => {
+  const pieChart = new TestPieChart("Test Pie Chart")
+  pieChart.addData({ Apples: 10, Bananas: 15, Cherries: 7 })
+  expect(pieChart.getSmallestSlice()).toEqual([{ label: 'Cherries', value: 7 }])
+  console.log(pieChart.getSmallestSlice())
+})
+
+test("PieChart can sort slices by value", () => {
+  const pieChart = new TestPieChart("Test Pie Chart")
+  pieChart.addData({ Apples: 10, Bananas: 15, Cherries: 7 })
+  const sortedData = pieChart.sortSlicesByValue()
+  expect(sortedData).toEqual([
+    { label: 'Bananas', value: 15 },
+    { label: 'Apples', value: 10 },
+    { label: 'Cherries', value: 7 }
+  ])
+  console.log("sorted by value", sortedData)
 })

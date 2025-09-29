@@ -5,6 +5,18 @@ export default class PieChart extends Chart {
         super(title)
     }
 
+    getLargestSlice() {
+        return this.getMaxValue()
+    }
+
+    getSmallestSlice() {
+        return this.getMinValue()
+    }
+
+    sortSlicesByValue(descending = true) {
+        return this.sortByValue(descending)
+    }
+
     getTotalVotes() {
         return this.getData().reduce((total, entry) => total + entry.value, 0)
     }
