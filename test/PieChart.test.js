@@ -36,3 +36,10 @@ test("PieChart can calculate vote percentages", () => {
   ])
     console.log(pieChart.getVotePercentage())
 })
+
+test("PieChart can identify slice with maximum value", () => {
+  const pieChart = new TestPieChart("Test Pie Chart")
+  pieChart.addData({ Apples: 10, Bananas: 7, Cherries: 15 })
+  expect(pieChart.getMaxValue()).toEqual([{ label: 'Cherries', value: 15 }])
+  console.log(pieChart.getMaxValue())
+})

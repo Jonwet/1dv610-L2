@@ -48,6 +48,34 @@ export default class Chart {
         return sortedData
     }
 
+    getMaxValue() {
+        const data = this.getData()
+        if (data.length === 0) return []
+
+        const value = data.map(function(entry) { 
+            return entry.value 
+        })
+        const maxValue = Math.max(...value)
+
+        return data.filter(function(entry) { 
+            return entry.value === maxValue 
+        })
+    }
+
+    getMinValue() {
+        const data = this.getData()
+        if (data.length === 0) return []
+
+        const value = data.map(function(entry) { 
+            return entry.value 
+        })
+        const minValue = Math.min(...value)
+
+        return data.filter(function(entry) { 
+            return entry.value === minValue 
+        })
+    }
+
     #validateTitle(title) {
         if (typeof title !== "string" || title.trim() === "") {
             throw new Error("Title can't be empty and must be a string")
