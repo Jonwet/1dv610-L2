@@ -36,6 +36,18 @@ export default class Chart {
         return this.#data
     }
 
+    sortByValue(descending = true) {
+        const sortedData = [...this.getData()]
+        sortedData.sort((a, b) => {
+            if (descending) {
+                return b.value - a.value
+            } else {
+                return a.value - b.value
+            }
+        })
+        return sortedData
+    }
+
     #validateTitle(title) {
         if (typeof title !== "string" || title.trim() === "") {
             throw new Error("Title can't be empty and must be a string")

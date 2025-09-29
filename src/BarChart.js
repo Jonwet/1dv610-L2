@@ -5,18 +5,6 @@ export default class BarChart extends Chart {
         super(title)
     }
 
-    sortByValue(descending = true) {
-        const sortedData = [...this.getData()]
-        sortedData.sort(function(a, b) {
-            if (descending) {
-                return b.value - a.value
-            } else {
-                return a.value - b.value
-            }
-        })
-        return sortedData
-    }
-
     getMaxBar() {
         const data = this.getData()
         if (data.length === 0) return []
