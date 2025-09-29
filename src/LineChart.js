@@ -23,6 +23,10 @@ export default class LineChart extends Chart {
         return Object.keys(this.#line)
     }
 
+    removeLine(name) {
+        delete this.#line[name]
+    }
+
     getMaxValueForEachLine() {
         const result = {}
         for (const [name, data] of Object.entries(this.#line)) {
