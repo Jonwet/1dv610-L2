@@ -18,12 +18,8 @@ export default class Chart {
         return this.#title
     }
 
-
-    // Bryt ut validator?
     addData(newData) {
-        if (typeof newData !== "object" || newData === null || Array.isArray(newData)) {
-            throw new Error("Data can't be null and must be an object")
-        }
+        this.#validateData(newData)
 
         for (const [label, value] of Object.entries(newData)) {
             if (typeof label !== "string" || label.trim() === "") {
@@ -43,6 +39,12 @@ export default class Chart {
     #validateTitle(title) {
         if (typeof title !== "string" || title.trim() === "") {
             throw new Error("Title can't be empty and must be a string")
+        }
+    }
+    
+    #validateData(data) {
+        if (typeof data !== "object" || data === null || Array.isArray(data)) {
+            throw new Error("Data can't be null and must be an object")
         }
     }
 }
