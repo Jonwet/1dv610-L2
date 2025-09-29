@@ -17,15 +17,15 @@ export default class PieChart extends Chart {
         return this.sortByValue(descending)
     }
 
-    getTotalVotes() {
+    getTotalEntries() {
         return this.getData().reduce((total, entry) => total + entry.value, 0)
     }
 
-    getVotePercentage() {
-        const totalVotes = this.getTotalVotes()
+    getPercentage() {
+        const totalEntries = this.getTotalEntries()
         return this.getData().map(entry => ({
             label: entry.label,
-            percentage: ((entry.value / totalVotes) * 100) + "%"
+            percentage: ((entry.value / totalEntries) * 100) + "%"
         }))
     }
 }

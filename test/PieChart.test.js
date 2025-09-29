@@ -22,19 +22,19 @@ test("PieChart data can be added and retrieved", () => {
 test("PieChart can calculate total votes", () => {
   const pieChart = new TestPieChart("Test Pie Chart")
   pieChart.addData({ Apples: 10, Bananas: 7, Cherries: 15 })
-  expect(pieChart.getTotalVotes()).toBe(32)
-  console.log(pieChart.getTotalVotes())
+  expect(pieChart.getTotalEntries()).toBe(32)
+  console.log(pieChart.getTotalEntries())
 })
 
-test("PieChart can calculate vote percentages", () => {
+test("PieChart can calculate entry percentages", () => {
   const pieChart = new TestPieChart("Test Pie Chart")
   pieChart.addData({ Apples: 10, Bananas: 7, Cherries: 15 })
-    expect(pieChart.getVotePercentage()).toEqual([
+    expect(pieChart.getPercentage()).toEqual([
     { label: 'Apples', percentage: '31.25%' },
     { label: 'Bananas', percentage: '21.875%' },
     { label: 'Cherries', percentage: '46.875%' }
   ])
-    console.log(pieChart.getVotePercentage())
+    console.log(pieChart.getPercentage())
 })
 
 test("PieChart can identify slice with maximum value", () => {
