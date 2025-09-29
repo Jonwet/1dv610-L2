@@ -11,6 +11,10 @@ export default class LineChart extends Chart {
         this.#line[name] = [...data]
     }
 
+    removeLine(name) {
+        delete this.#line[name]
+    }
+
     getLines() {
         const copyOfLines = {}
         for (const [name, data] of Object.entries(this.#line)) {
@@ -21,10 +25,6 @@ export default class LineChart extends Chart {
 
     getLineNames() {
         return Object.keys(this.#line)
-    }
-
-    removeLine(name) {
-        delete this.#line[name]
     }
 
     getMaxValueForEachLine() {
