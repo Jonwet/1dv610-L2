@@ -50,4 +50,32 @@ export default class LineChart extends Chart {
         }
         return result
     }
+
+    // Gets the global max value among all lines, used for scaling the chart
+    getGlobalMaxValue() {
+        const allValues = []
+
+        for (const data of Object.values(this.#line)) {
+            allValues.push(...data)
+        }
+        if (allValues.length > 0) {
+            return Math.max(...allValues)
+        } else {
+            return null
+        }
+    }
+
+    // Gets the global min value among all lines, used for scaling the chart
+    getGlobalMinValue() {
+        const allValues = []
+
+        for (const data of Object.values(this.#line)) {
+            allValues.push(...data)
+        }
+        if (allValues.length > 0) {
+            return Math.min(...allValues)
+        } else {
+            return null
+        }
+    }
 }
