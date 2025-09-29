@@ -22,12 +22,12 @@ export default class Chart {
     // Bryt ut validator?
     addData(newData) {
         if (typeof newData !== "object" || newData === null || Array.isArray(newData)) {
-            throw new Error("Data must be a non-null object")
+            throw new Error("Data can't be null and must be an object")
         }
 
         for (const [label, value] of Object.entries(newData)) {
             if (typeof label !== "string" || label.trim() === "") {
-                throw new Error("Data labels must be non-empty strings")
+                throw new Error("Data labels can't be empty and must be strings")
             }
             if (typeof value !== "number" || isNaN(value)) {
                 throw new Error("Data values must be numbers")
@@ -42,7 +42,7 @@ export default class Chart {
 
     #validateTitle(title) {
         if (typeof title !== "string" || title.trim() === "") {
-            throw new Error("Title must be a non-empty string")
+            throw new Error("Title can't be empty and must be a string")
         }
     }
 }

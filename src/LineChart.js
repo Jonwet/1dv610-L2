@@ -1,22 +1,49 @@
 import Chart from "./Chart.js"
 
 export default class LineChart extends Chart {
-    #series = {}
+    #line = {}
 
     constructor(title = "Untitled Line Chart") {
         super(title)
     }
 
-    // A line in the line chart has a name and multiple points of data
-    addSeries(name, data) {
-        this.#series[name] = [...data]
+    addLines(name, data) {
+        this.#line[name] = [...data]
     }
 
-    getSeries() {
-        const copyOfSeries = {}
-        for (const [name, data] of Object.entries(this.#series)) {
-            copyOfSeries[name] = [...data]
+    getLines() {
+        const copyOfLines = {}
+        for (const [name, data] of Object.entries(this.#line)) {
+            copyOfLines[name] = [...data]
         }
-        return copyOfSeries
+        return copyOfLines
+    }
+
+    getLineNames() {
+        return Object.keys(this.#line)
+    }
+
+    getMaxValueForEachLine() {
+        const result = {}
+        for (const [name, data] of Object.entries(this.#line)) {
+            if (data.length === 0) {
+                result[name] = null
+            } else {
+                result[name] = Math.max(...data)
+            }
+        }
+        return result
+    }
+
+    getMinValueForEachLine() {
+        const result = {}
+        for (const [name, data] of Object.entries(this.#line)) {
+            if (data.length === 0) {
+                result[name] = null
+            } else {
+                result[name] = Math.min(...data)
+            }
+        }
+        return result
     }
 }
