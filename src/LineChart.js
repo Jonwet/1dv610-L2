@@ -1,9 +1,9 @@
-import Chart from "./Chart.js"
+import Chart from './Chart.js'
 
 export default class LineChart extends Chart {
     #line = {}
 
-    constructor(title = "Untitled Line Chart") {
+    constructor(title = 'Untitled Line Chart') {
         super(title)
     }
 

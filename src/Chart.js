@@ -2,11 +2,10 @@ export default class Chart {
     #title
     #data
 
-    constructor(title = "Untitled Chart") {
+    constructor(title = 'Untitled Chart') {
         this.#validateTitle(title)
         this.#title = title
         this.#data = []
-
     }
 
     setTitle(title) {
@@ -22,11 +21,13 @@ export default class Chart {
         this.#validateData(newData)
 
         for (const [label, value] of Object.entries(newData)) {
-            if (typeof label !== "string" || label.trim() === "") {
-                throw new Error("Data labels can't be empty and must be strings")
+            if (typeof label !== 'string' || label.trim() === '') {
+                throw new Error(
+                    "Data labels can't be empty and must be strings",
+                )
             }
-            if (typeof value !== "number" || isNaN(value)) {
-                throw new Error("Data values must be numbers")
+            if (typeof value !== 'number' || isNaN(value)) {
+                throw new Error('Data values must be numbers')
             }
             this.#data.push({ label, value })
         }
@@ -35,6 +36,8 @@ export default class Chart {
     getData() {
         return this.#data
     }
+
+    updateData(label, newValue) {}
 
     sortByValue(descending = true) {
         const sortedData = [...this.getData()]
@@ -52,13 +55,13 @@ export default class Chart {
         const data = this.getData()
         if (data.length === 0) return []
 
-        const value = data.map(function(entry) { 
-            return entry.value 
+        const value = data.map(function (entry) {
+            return entry.value
         })
         const maxValue = Math.max(...value)
 
-        return data.filter(function(entry) { 
-            return entry.value === maxValue 
+        return data.filter(function (entry) {
+            return entry.value === maxValue
         })
     }
 
@@ -66,24 +69,24 @@ export default class Chart {
         const data = this.getData()
         if (data.length === 0) return []
 
-        const value = data.map(function(entry) { 
-            return entry.value 
+        const value = data.map(function (entry) {
+            return entry.value
         })
         const minValue = Math.min(...value)
 
-        return data.filter(function(entry) { 
-            return entry.value === minValue 
+        return data.filter(function (entry) {
+            return entry.value === minValue
         })
     }
 
     #validateTitle(title) {
-        if (typeof title !== "string" || title.trim() === "") {
+        if (typeof title !== 'string' || title.trim() === '') {
             throw new Error("Title can't be empty and must be a string")
         }
     }
-    
+
     #validateData(data) {
-        if (typeof data !== "object" || data === null || Array.isArray(data)) {
+        if (typeof data !== 'object' || data === null || Array.isArray(data)) {
             throw new Error("Data can't be null and must be an object")
         }
     }

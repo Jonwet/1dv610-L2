@@ -1,7 +1,7 @@
-import Chart from "./Chart.js"
+import Chart from './Chart.js'
 
 export default class PieChart extends Chart {
-    constructor(title = "Untitled Pie Chart") {
+    constructor(title = 'Untitled Pie Chart') {
         super(title)
     }
 
@@ -23,9 +23,9 @@ export default class PieChart extends Chart {
 
     getPercentage() {
         const totalEntries = this.getTotalEntries()
-        return this.getData().map(entry => ({
+        return this.getData().map((entry) => ({
             label: entry.label,
-            percentage: ((entry.value / totalEntries) * 100) + "%"
+            percentage: (entry.value / totalEntries) * 100 + '%',
         }))
     }
 }
