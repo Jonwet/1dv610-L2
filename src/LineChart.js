@@ -21,10 +21,7 @@ export default class LineChart extends Chart {
     }
 
     getLines() {
-        const copyOfLines = {}
-        for (const [name, data] of Object.entries(this.#line)) {
-            copyOfLines[name] = [...data]
-        }
+        const copyOfLines = { ...this.#line }
         return copyOfLines
     }
 

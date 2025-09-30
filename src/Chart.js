@@ -62,10 +62,7 @@ export default class Chart {
      * @returns {Array} - A copy of the chart data.
      */
     getData() {
-        const copyOfData = []
-        for (const entry of this.#data) {
-            copyOfData.push({ ...entry })
-        }
+        const copyOfData = [...this.#data]
         return copyOfData
     }
 
