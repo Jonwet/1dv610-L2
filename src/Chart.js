@@ -31,9 +31,9 @@ export default class Chart {
 
             if (this.#data.some((entry) => entry.label === label)) {
                 throw new Error(`Data with label "${label}" already exists`)
+            } else {
+                this.#data.push({ label, value })
             }
-
-            this.#data.push({ label, value })
         }
     }
 
@@ -48,8 +48,9 @@ export default class Chart {
         const entry = this.#data.find((entry) => entry.label === label)
         if (!entry) {
             throw new Error(`Data with label "${label}" not found`)
+        } else {
+            entry.value = newValue
         }
-        entry.value = newValue
     }
 
     getTotalEntries() {
