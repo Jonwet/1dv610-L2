@@ -7,7 +7,7 @@ test('Chart title can be set and retrieved', () => {
 
     expect(chart.getTitle()).toBe('Test Chart')
 
-    chart.setTitle('Updated Chart')
+    chart.setChartTitle('Updated Chart')
 
     expect(chart.getTitle()).toBe('Updated Chart')
 })
@@ -19,6 +19,17 @@ test('Chart data can be added and retrieved', () => {
 
     expect(chart.getData()).toEqual([
         { label: 'Apples', value: 10 },
+        { label: 'Bananas', value: 7 },
+    ])
+    console.log(chart.getData())
+})
+
+test('Chart data can be updated', () => {
+    const chart = new TestChart('Test Chart')
+    chart.addData({ Apples: 10, Bananas: 7 })
+    chart.updateData('Apples', 15)
+    expect(chart.getData()).toEqual([
+        { label: 'Apples', value: 15 },
         { label: 'Bananas', value: 7 },
     ])
     console.log(chart.getData())

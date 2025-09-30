@@ -1,3 +1,8 @@
+/**
+ * @file Defines the PieChart class.
+ * @author Jonatan Wetterberg
+ */
+
 import Chart from './Chart.js'
 
 export default class PieChart extends Chart {
@@ -17,15 +22,15 @@ export default class PieChart extends Chart {
         return this.sortByValue(descending)
     }
 
-    getTotalEntries() {
-        return this.getData().reduce((total, entry) => total + entry.value, 0)
+    getTotal() {
+        return this.getTotalEntries()
     }
 
     getPercentage() {
-        const totalEntries = this.getTotalEntries()
+        const total = this.getTotal()
         return this.getData().map((entry) => ({
             label: entry.label,
-            percentage: (entry.value / totalEntries) * 100 + '%',
+            percentage: (entry.value / total) * 100 + '%',
         }))
     }
 }

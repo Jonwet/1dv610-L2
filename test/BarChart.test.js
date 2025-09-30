@@ -30,6 +30,6 @@ test('BarChart can sort data by value', () => {
 test('BarChart can identify bar with maximum value', () => {
     const barChart = new BarChart('Test Bar Chart')
     barChart.addData({ Apples: 10, Bananas: 7, Cherries: 15 })
-    expect(barChart.getHighestBar()).toEqual([{ label: 'Cherries', value: 15 }])
-    console.log(barChart.getHighestBar())
+    expect(barChart.getLargestBar()).toEqual([{ label: 'Cherries', value: 15 }])
+    console.log(barChart.getLargestBar())
 })

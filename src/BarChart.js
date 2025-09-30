@@ -1,3 +1,8 @@
+/**
+ * @file Defines the BarChart class.
+ * @author Jonatan Wetterberg
+ */
+
 import Chart from './Chart.js'
 
 export default class BarChart extends Chart {
@@ -5,15 +10,19 @@ export default class BarChart extends Chart {
         super(title)
     }
 
-    getHighestBar() {
+    getLargestBar() {
         return this.getMaxValue()
     }
 
-    getLowestBar() {
+    getSmallestBar() {
         return this.getMinValue()
     }
 
     sortBarsByValue(descending = true) {
         return this.sortByValue(descending)
+    }
+
+    getTotal() {
+        return this.getTotalEntries()
     }
 }

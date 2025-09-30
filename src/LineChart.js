@@ -1,3 +1,8 @@
+/**
+ * @file Defines the LineChart class.
+ * @author Jonatan Wetterberg
+ */
+
 import Chart from './Chart.js'
 
 export default class LineChart extends Chart {

@@ -1,34 +1,38 @@
+/**
+ * @file Defines the Chart class.
+ * @author Jonatan Wetterberg
+ */
+
 export default class Chart {
-    #title
+    #chartTitle
     #data
 
-    constructor(title = 'Untitled Chart') {
-        this.#validateTitle(title)
-        this.#title = title
+    constructor(chartTitle = 'Unnamed Chart') {
+        this.#validateTitle(chartTitle)
+        this.#chartTitle = chartTitle
         this.#data = []
     }
 
-    setTitle(title) {
-        this.#validateTitle(title)
-        this.#title = title
+    setChartTitle(chartTitle) {
+        this.#validateTitle(chartTitle)
+        this.#chartTitle = chartTitle
     }
 
     getTitle() {
-        return this.#title
+        return this.#chartTitle
     }
 
     addData(newData) {
         this.#validateData(newData)
 
         for (const [label, value] of Object.entries(newData)) {
-            if (typeof label !== 'string' || label.trim() === '') {
-                throw new Error(
-                    "Data labels can't be empty and must be strings",
-                )
+            this.#validateLabel(label)
+            this.#validateValue(value)
+
+            if (this.#data.some((entry) => entry.label === label)) {
+                throw new Error(`Data with label "${label}" already exists`)
             }
-            if (typeof value !== 'number' || isNaN(value)) {
-                throw new Error('Data values must be numbers')
-            }
+
             this.#data.push({ label, value })
         }
     }
@@ -37,7 +41,20 @@ export default class Chart {
         return this.#data
     }
 
-    updateData(label, newValue) {}
+    updateData(label, newValue) {
+        this.#validateLabel(label)
+        this.#validateValue(newValue)
+
+        const entry = this.#data.find((entry) => entry.label === label)
+        if (!entry) {
+            throw new Error(`Data with label "${label}" not found`)
+        }
+        entry.value = newValue
+    }
+
+    getTotalEntries() {
+        return this.#data.reduce((total, entry) => total + entry.value, 0)
+    }
 
     sortByValue(descending = true) {
         const sortedData = [...this.getData()]
@@ -55,32 +72,24 @@ export default class Chart {
         const data = this.getData()
         if (data.length === 0) return []
 
-        const value = data.map(function (entry) {
-            return entry.value
-        })
+        const value = data.map((entry) => entry.value)
         const maxValue = Math.max(...value)
 
-        return data.filter(function (entry) {
-            return entry.value === maxValue
-        })
+        return data.filter((entry) => entry.value === maxValue)
     }
 
     getMinValue() {
         const data = this.getData()
         if (data.length === 0) return []
 
-        const value = data.map(function (entry) {
-            return entry.value
-        })
+        const value = data.map((entry) => entry.value)
         const minValue = Math.min(...value)
 
-        return data.filter(function (entry) {
-            return entry.value === minValue
-        })
+        return data.filter((entry) => entry.value === minValue)
     }
 
-    #validateTitle(title) {
-        if (typeof title !== 'string' || title.trim() === '') {
+    #validateTitle(chartTitle) {
+        if (typeof chartTitle !== 'string' || chartTitle.trim() === '') {
             throw new Error("Title can't be empty and must be a string")
         }
     }
@@ -88,6 +97,18 @@ export default class Chart {
     #validateData(data) {
         if (typeof data !== 'object' || data === null || Array.isArray(data)) {
             throw new Error("Data can't be null and must be an object")
+        }
+    }
+
+    #validateLabel(label) {
+        if (typeof label !== 'string' || label.trim() === '') {
+            throw new Error("Data labels can't be empty and must be strings")
+        }
+    }
+
+    #validateValue(value) {
+        if (typeof value !== 'number' || isNaN(value)) {
+            throw new Error('Data values must be numbers')
         }
     }
 }
