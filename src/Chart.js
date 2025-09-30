@@ -73,20 +73,38 @@ export default class Chart {
         const data = this.getData()
         if (data.length === 0) return []
 
-        const value = data.map((entry) => entry.value)
-        const maxValue = Math.max(...value)
+        let maxValue = data[0].value
+        let highestValues = [data[0]]
 
-        return data.filter((entry) => entry.value === maxValue)
+        for (let i = 1; i < data.length; i++) {
+            if (data[i].value > maxValue) {
+                maxValue = data[i].value
+                highestValues = [data[i]]
+            } else if (data[i].value === maxValue) {
+                highestValues.push(data[i])
+            }
+        }
+
+        return highestValues
     }
 
     getMinValue() {
         const data = this.getData()
         if (data.length === 0) return []
 
-        const value = data.map((entry) => entry.value)
-        const minValue = Math.min(...value)
+        let minValue = data[0].value
+        let lowestValues = [data[0]]
 
-        return data.filter((entry) => entry.value === minValue)
+        for (let i = 1; i < data.length; i++) {
+            if (data[i].value < minValue) {
+                minValue = data[i].value
+                lowestValues = [data[i]]
+            } else if (data[i].value === minValue) {
+                lowestValues.push(data[i])
+            }
+        }
+
+        return lowestValues
     }
 
     #validateTitle(chartTitle) {
