@@ -57,3 +57,19 @@ test('LineChart can get min value for each line', () => {
     })
     console.log(lineChart.getMinValueForEachLine())
 })
+
+test('LineChart can get the global max value among all lines', () => {
+    const lineChart = new TestLineChart('Test Line Chart')
+    lineChart.addLines('Line A', [1, 2, 3])
+    lineChart.addLines('Line B', [4, 5, 6])
+    expect(lineChart.getGlobalMaxValue()).toBe(6)
+    console.log(lineChart.getGlobalMaxValue())
+})
+
+test('LineChart can get the global min value among all lines', () => {
+    const lineChart = new TestLineChart('Test Line Chart')
+    lineChart.addLines('Line A', [1, 2, 3])
+    lineChart.addLines('Line B', [4, 5, 6])
+    expect(lineChart.getGlobalMinValue()).toBe(1)
+    console.log(lineChart.getGlobalMinValue())
+})

@@ -29,7 +29,24 @@ test('BarChart can sort data by value', () => {
 
 test('BarChart can identify bar with maximum value', () => {
     const barChart = new BarChart('Test Bar Chart')
-    barChart.addData({ Apples: 10, Bananas: 7, Cherries: 15 })
-    expect(barChart.getLargestBar()).toEqual([{ label: 'Cherries', value: 15 }])
+    barChart.addData({ Apples: 10, Bananas: 7, Cherries: 15, Oranges: 15 })
+    expect(barChart.getLargestBar()).toEqual([
+        { label: 'Cherries', value: 15 },
+        { label: 'Oranges', value: 15 },
+    ])
     console.log(barChart.getLargestBar())
+})
+
+test('BarChart can identify bar with minimum value', () => {
+    const barChart = new BarChart('Test Bar Chart')
+    barChart.addData({ Apples: 10, Bananas: 7, Cherries: 15 })
+    expect(barChart.getSmallestBar()).toEqual([{ label: 'Bananas', value: 7 }])
+    console.log(barChart.getSmallestBar())
+})
+
+test('BarChart can get total number of entries', () => {
+    const barChart = new BarChart('Test Bar Chart')
+    barChart.addData({ Apples: 10, Bananas: 7, Cherries: 15 })
+    expect(barChart.getTotal()).toBe(32)
+    console.log(barChart.getTotal())
 })
