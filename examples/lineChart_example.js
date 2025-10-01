@@ -1,4 +1,4 @@
-import { LineChart } from '../index.js'
+import { LineChart } from '../superChart.js'
 
 const lineChart = new LineChart('Fruit Sales Over Time')
 lineChart.addLines('Apples', [5, 10, 15, 20])

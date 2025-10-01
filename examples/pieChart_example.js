@@ -1,4 +1,4 @@
-import { PieChart } from '../index.js'
+import { PieChart } from '../superChart.js'
 
 const pieChart = new PieChart('Fruit Stand')
 pieChart.addData({ Apples: 2, Bananas: 4, Kiwis: 8 })

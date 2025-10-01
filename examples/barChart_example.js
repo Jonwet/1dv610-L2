@@ -1,4 +1,4 @@
-import { BarChart } from '../index.js'
+import { BarChart } from '../superChart.js'
 
 const barChart = new BarChart('Fruit Stand')
 barChart.addData({ Apples: 2, Bananas: 4, Kiwis: 8 })
