@@ -1,0 +1,16 @@
+import { LineChart } from '../index.js'
+
+const lineChart = new LineChart('Fruit Sales Over Time')
+lineChart.addLines('Apples', [5, 10, 15, 20])
+lineChart.addLines('Bananas', [3, 6, 9, 12])
+lineChart.addLines('Kiwis', [2, 4, 6, 8])
+console.log('Line chart title: ' + lineChart.getTitle())
+console.log('Line chart data: ', lineChart.getLines())
+console.log('Line names: ', lineChart.getLineNames())
+console.log('Max value for each line: ', lineChart.getMaxValueForEachLine())
+console.log('Min value for each line: ', lineChart.getMinValueForEachLine())
+console.log('Global max value: ' + lineChart.getGlobalMaxValue())
+console.log('Global min value: ' + lineChart.getGlobalMinValue())
+console.log('Line chart data after removing Kiwis: ')
+lineChart.removeLine('Kiwis')
+console.log(lineChart.getLines())
