@@ -68,8 +68,8 @@ test('LineChart can get the global max value among all lines', () => {
 
 test('LineChart can get the global min value among all lines', () => {
     const lineChart = new TestLineChart('Test Line Chart')
-    lineChart.addLines('Line A', [1, 2, 3])
+    lineChart.addLines('Line A', [-1, 2, 3])
     lineChart.addLines('Line B', [4, 5, 6])
-    expect(lineChart.getGlobalMinValue()).toBe(1)
+    expect(lineChart.getGlobalMinValue()).toBe(-1)
     console.log(lineChart.getGlobalMinValue())
 })
