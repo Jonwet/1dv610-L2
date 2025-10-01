@@ -1,3 +1,4 @@
+import LineChart from '../src/LineChart'
 import LineChar from '../src/LineChart'
 
 class TestLineChart extends LineChar {}
