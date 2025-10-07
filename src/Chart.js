@@ -10,6 +10,7 @@ export default class Chart {
     #chartTitle
     #data
 
+    // BACKUP COMMIT
     /**
      * Creates an instance of the Chart class.
      * @param {string} chartTitle - The title of the chart.
