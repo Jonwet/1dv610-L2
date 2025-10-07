@@ -18,7 +18,7 @@ export default class BarChart extends Chart {
      * @returns {Array} - An array containing the entry with the maximum value.
      */
     getLargestBar() {
-        return this.getMaxValue()
+        return this.getExtremeValues('max')
     }
 
     /**
@@ -26,7 +26,7 @@ export default class BarChart extends Chart {
      * @returns {Array} - An array containing the entry with the minimum value.
      */
     getSmallestBar() {
-        return this.getMinValue()
+        return this.getExtremeValues('min')
     }
 
     /**

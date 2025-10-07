@@ -57,6 +57,17 @@ export default class Chart {
         }
     }
 
+    removeData(label) {
+        this.#validateLabel(label)
+
+        const findLabel = this.#data.find((entry) => entry.label === label)
+        if (!findLabel) {
+            throw new Error(`Data with label "${label}" not found`)
+        } else {
+            this.#data = this.#data.filter((entry) => entry.label !== label)
+        }
+    }
+
     /**
      * Gets a copy of the chart data.
      * @returns {Array} - A copy of the chart data.
@@ -108,50 +119,32 @@ export default class Chart {
         return sortedData
     }
 
-    /**
-     * Gets the maximum value from the chart data.
-     * @returns {Array} - An array containing the entry with the maximum value.
-     */
-    getMaxValue() {
+    getExtremeValues(type = 'min') {
         const data = this.getData()
         if (data.length === 0) return []
 
-        let maxValue = data[0].value
-        let highestValues = [data[0]]
+        let comparer
+        if (type === 'min') {
+            comparer = (a, b) => a < b
+        } else if (type === 'max') {
+            comparer = (a, b) => a > b
+        } else {
+            throw new Error('Type must be "min" or "max"')
+        }
+
+        let extremeValue = data[0].value
+        let extremeValues = [data[0]]
 
         for (let i = 1; i < data.length; i++) {
-            if (data[i].value > maxValue) {
-                maxValue = data[i].value
-                highestValues = [data[i]]
-            } else if (data[i].value === maxValue) {
-                highestValues.push(data[i])
+            if (comparer(data[i].value, extremeValue)) {
+                extremeValue = data[i].value
+                extremeValues = [data[i]]
+            } else if (data[i].value === extremeValue) {
+                extremeValues.push(data[i])
             }
         }
 
-        return highestValues
-    }
-
-    /**
-     * Gets the minimum value from the chart data.
-     * @returns {Array} - An array containing the entry with the minimum value.
-     */
-    getMinValue() {
-        const data = this.getData()
-        if (data.length === 0) return []
-
-        let minValue = data[0].value
-        let lowestValues = [data[0]]
-
-        for (let i = 1; i < data.length; i++) {
-            if (data[i].value < minValue) {
-                minValue = data[i].value
-                lowestValues = [data[i]]
-            } else if (data[i].value === minValue) {
-                lowestValues.push(data[i])
-            }
-        }
-
-        return lowestValues
+        return extremeValues
     }
 
     // Title validator

@@ -24,7 +24,7 @@ export default class LineChart extends Chart {
      * @param {string} name - The name of the line.
      * @param {Array<number>} data - The data points for the line.
      */
-    addLines(name, data) {
+    addLine(name, data) {
         this.#line[name] = [...data]
     }
 
@@ -58,15 +58,15 @@ export default class LineChart extends Chart {
      * @returns {Object} - An object mapping line names to their maximum values.
      */
     getMaxValueForEachLine() {
-        const result = {}
+        const maxValue = {}
         for (const [name, data] of Object.entries(this.#line)) {
             if (data.length === 0) {
-                result[name] = null
+                maxValue[name] = null
             } else {
-                result[name] = Math.max(...data)
+                maxValue[name] = Math.max(...data)
             }
         }
-        return result
+        return maxValue
     }
 
     /**
@@ -74,15 +74,15 @@ export default class LineChart extends Chart {
      * @returns {Object} - An object mapping line names to their minimum values.
      */
     getMinValueForEachLine() {
-        const result = {}
+        const minValue = {}
         for (const [name, data] of Object.entries(this.#line)) {
             if (data.length === 0) {
-                result[name] = null
+                minValue[name] = null
             } else {
-                result[name] = Math.min(...data)
+                minValue[name] = Math.min(...data)
             }
         }
-        return result
+        return minValue
     }
 
     /**
@@ -90,13 +90,13 @@ export default class LineChart extends Chart {
      * @returns {number|null} - The global maximum value among all lines, or null if no data exists.
      */
     getGlobalMaxValue() {
-        const allValues = []
+        const maxAllValues = []
 
         for (const data of Object.values(this.#line)) {
-            allValues.push(...data)
+            maxAllValues.push(...data)
         }
-        if (allValues.length > 0) {
-            return Math.max(...allValues)
+        if (maxAllValues.length > 0) {
+            return Math.max(...maxAllValues)
         } else {
             return null
         }
@@ -107,13 +107,13 @@ export default class LineChart extends Chart {
      * @returns {number|null} - The global minimum value among all lines, or null if no data exists.
      */
     getGlobalMinValue() {
-        const allValues = []
+        const minAllValues = []
 
         for (const data of Object.values(this.#line)) {
-            allValues.push(...data)
+            minAllValues.push(...data)
         }
-        if (allValues.length > 0) {
-            return Math.min(...allValues)
+        if (minAllValues.length > 0) {
+            return Math.min(...minAllValues)
         } else {
             return null
         }
