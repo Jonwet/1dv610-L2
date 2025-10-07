@@ -132,14 +132,14 @@ export default class Chart {
             throw new Error('Type must be "min" or "max"')
         }
 
-        let extremeValue = data[0].value
+        let currentExtremeValue = data[0].value
         let extremeValues = [data[0]]
 
         for (let i = 1; i < data.length; i++) {
-            if (comparer(data[i].value, extremeValue)) {
-                extremeValue = data[i].value
+            if (comparer(data[i].value, currentExtremeValue)) {
+                currentExtremeValue = data[i].value
                 extremeValues = [data[i]]
-            } else if (data[i].value === extremeValue) {
+            } else if (data[i].value === currentExtremeValue) {
                 extremeValues.push(data[i])
             }
         }
