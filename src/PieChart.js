@@ -18,7 +18,7 @@ export default class PieChart extends Chart {
      * @returns {Array} - An array containing the entry with the maximum value.
      */
     getLargestSlice() {
-        return this.getMaxValue()
+        return this.getExtremeValues('max')
     }
 
     /**
@@ -26,7 +26,7 @@ export default class PieChart extends Chart {
      * @returns {Array} - An array containing the entry with the minimum value.
      */
     getSmallestSlice() {
-        return this.getMinValue()
+        return this.getExtremeValues('min')
     }
 
     /**

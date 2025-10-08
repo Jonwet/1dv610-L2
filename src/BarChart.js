@@ -45,21 +45,4 @@ export default class BarChart extends Chart {
     getTotal() {
         return this.getTotalEntries()
     }
-
-    /**
-     * Renders the bar chart in the terminal.
-     * @returns {string} - The rendered bar chart as a string.
-     */
-    render() {
-        const data = this.getData()
-
-        let result = ''
-
-        data.forEach((entry) => {
-            const bar = '#'.repeat(entry.value)
-            result = result + `${entry.label} : ${bar} ${entry.value}\n`
-        })
-
-        return result
-    }
 }

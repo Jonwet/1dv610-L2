@@ -10,7 +10,6 @@ export default class Chart {
     #chartTitle
     #data
 
-    // BACKUP COMMIT
     /**
      * Creates an instance of the Chart class.
      * @param {string} chartTitle - The title of the chart.
@@ -50,7 +49,7 @@ export default class Chart {
             this.#validateLabel(label)
             this.#validateValue(value)
 
-            if (this.#data.some((entry) => entry.label === label)) {
+            if (this.#data.some((dataEntry) => dataEntry.label === label)) {
                 throw new Error(`Data with label "${label}" already exists`)
             } else {
                 this.#data.push({ label, value })
@@ -61,11 +60,15 @@ export default class Chart {
     removeData(label) {
         this.#validateLabel(label)
 
-        const findLabel = this.#data.find((entry) => entry.label === label)
+        const findLabel = this.#data.find(
+            (dataEntry) => dataEntry.label === label,
+        )
         if (!findLabel) {
             throw new Error(`Data with label "${label}" not found`)
         } else {
-            this.#data = this.#data.filter((entry) => entry.label !== label)
+            this.#data = this.#data.filter(
+                (dataEntry) => dataEntry.label !== label,
+            )
         }
     }
 
@@ -87,11 +90,13 @@ export default class Chart {
         this.#validateLabel(label)
         this.#validateValue(newValue)
 
-        const entry = this.#data.find((entry) => entry.label === label)
-        if (!entry) {
+        const dataEntry = this.#data.find(
+            (dataEntry) => dataEntry.label === label,
+        )
+        if (!dataEntry) {
             throw new Error(`Data with label "${label}" not found`)
         } else {
-            entry.value = newValue
+            dataEntry.value = newValue
         }
     }
 
@@ -100,7 +105,10 @@ export default class Chart {
      * @returns {number} - The total number of entries.
      */
     getTotalEntries() {
-        return this.#data.reduce((total, entry) => total + entry.value, 0)
+        return this.#data.reduce(
+            (total, dataEntry) => total + dataEntry.value,
+            0,
+        )
     }
 
     /**

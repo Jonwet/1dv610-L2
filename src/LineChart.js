@@ -53,20 +53,28 @@ export default class LineChart extends Chart {
         return Object.keys(this.#line)
     }
 
+    getExtremeValuesForEachLine(type = 'min') {
+        this.#validateExtremeType(type)
+
+        const extremeValues = {}
+        for (const [name, data] of Object.entries(this.#line)) {
+            if (data.length === 0) {
+                extremeValues[name] = null
+            } else if (type === 'max') {
+                extremeValues[name] = Math.max(...data)
+            } else if (type === 'min') {
+                extremeValues[name] = Math.min(...data)
+            }
+        }
+        return extremeValues
+    }
+
     /**
      * Gets the maximum value for each line in the chart.
      * @returns {Object} - An object mapping line names to their maximum values.
      */
     getMaxValueForEachLine() {
-        const maxValue = {}
-        for (const [name, data] of Object.entries(this.#line)) {
-            if (data.length === 0) {
-                maxValue[name] = null
-            } else {
-                maxValue[name] = Math.max(...data)
-            }
-        }
-        return maxValue
+        return this.getExtremeValuesForEachLine('max')
     }
 
     /**
@@ -74,15 +82,23 @@ export default class LineChart extends Chart {
      * @returns {Object} - An object mapping line names to their minimum values.
      */
     getMinValueForEachLine() {
-        const minValue = {}
-        for (const [name, data] of Object.entries(this.#line)) {
-            if (data.length === 0) {
-                minValue[name] = null
-            } else {
-                minValue[name] = Math.min(...data)
-            }
+        return this.getExtremeValuesForEachLine('min')
+    }
+
+    getGlobalExtremeValue(type = 'min') {
+        this.#validateExtremeType(type)
+
+        const allValues = []
+        for (const data of Object.values(this.#line)) {
+            allValues.push(...data)
         }
-        return minValue
+        if (allValues.length === 0) {
+            return null
+        } else if (type === 'max') {
+            return Math.max(...allValues)
+        } else if (type === 'min') {
+            return Math.min(...allValues)
+        }
     }
 
     /**
@@ -90,16 +106,7 @@ export default class LineChart extends Chart {
      * @returns {number|null} - The global maximum value among all lines, or null if no data exists.
      */
     getGlobalMaxValue() {
-        const maxAllValues = []
-
-        for (const data of Object.values(this.#line)) {
-            maxAllValues.push(...data)
-        }
-        if (maxAllValues.length > 0) {
-            return Math.max(...maxAllValues)
-        } else {
-            return null
-        }
+        return this.getGlobalExtremeValue('max')
     }
 
     /**
@@ -107,15 +114,12 @@ export default class LineChart extends Chart {
      * @returns {number|null} - The global minimum value among all lines, or null if no data exists.
      */
     getGlobalMinValue() {
-        const minAllValues = []
+        return this.getGlobalExtremeValue('min')
+    }
 
-        for (const data of Object.values(this.#line)) {
-            minAllValues.push(...data)
-        }
-        if (minAllValues.length > 0) {
-            return Math.min(...minAllValues)
-        } else {
-            return null
+    #validateExtremeType(type) {
+        if (type !== 'max' && type !== 'min') {
+            throw new Error('Type must be "min" or "max"')
         }
     }
 }

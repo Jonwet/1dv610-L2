@@ -10,4 +10,3 @@ console.log('Smallest Value in BarChart: ', barChart.getSmallestBar()) // [ { la
 console.log('Sorted BarChart Data: ', barChart.sortBarsByValue(true)) // [ { label: 'Kiwis', value: 8 }, { label: 'Bananas', value: 4 }, { label: 'Apples', value: 2 } ]
 console.log('Sorted BarChart Data Ascending: ', barChart.sortBarsByValue(false)) // [ { label: 'Apples', value: 2 }, { label: 'Bananas', value: 4 }, { label: 'Kiwis', value: 8 } ]
 console.log('Total Sales: ' + barChart.getTotal()) // 14
-console.log('Bar Chart Rendered:\n' + barChart.render())

@@ -47,15 +47,3 @@ test('BarChart can get total number of entries', () => {
     expect(barChart.getTotal()).toBe(32)
     console.log(barChart.getTotal())
 })
-
-test('BarChart can render chart', () => {
-    const barChart = new BarChart('Test Bar Chart')
-    barChart.addData({ Apples: 2, Bananas: 4, Kiwis: 8 })
-    const renderedChart = barChart.render()
-    const expectedOutput = `Apples : ## 2
-Bananas : #### 4
-Kiwis : ######## 8
-`
-    expect(renderedChart).toBe(expectedOutput)
-    console.log(renderedChart)
-})
