@@ -51,10 +51,12 @@ export default class PieChart extends Chart {
      * @returns {Array} - An array of objects containing labels and their corresponding percentages.
      */
     getPercentage() {
+        const percentageMultiplier = 100
+
         const total = this.getTotal()
         return this.getData().map((entry) => ({
             label: entry.label,
-            percentage: (entry.value / total) * 100 + '%',
+            percentage: (entry.value / total) * percentageMultiplier + '%',
         }))
     }
 }
