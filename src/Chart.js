@@ -129,31 +129,20 @@ export default class Chart {
     }
 
     getExtremeValues(type = 'min') {
-        const data = this.getData()
-        if (data.length === 0) return []
-
-        let comparer
-        if (type === 'min') {
-            comparer = (a, b) => a < b
-        } else if (type === 'max') {
-            comparer = (a, b) => a > b
-        } else {
+        if (type !== 'max' && type !== 'min') {
             throw new Error('Type must be "min" or "max"')
         }
-
-        let currentExtremeValue = data[0].value
-        let extremeValues = [data[0]]
-
-        for (let i = 1; i < data.length; i++) {
-            if (comparer(data[i].value, currentExtremeValue)) {
-                currentExtremeValue = data[i].value
-                extremeValues = [data[i]]
-            } else if (data[i].value === currentExtremeValue) {
-                extremeValues.push(data[i])
-            }
+        if (this.#data.length === 0) {
+            return []
         }
 
-        return extremeValues
+        let extremeValue
+        if (type === 'max') {
+            extremeValue = Math.max(...this.#data.map((entry) => entry.value))
+        } else if (type === 'min') {
+            extremeValue = Math.min(...this.#data.map((entry) => entry.value))
+        }
+        return this.#data.filter((entry) => entry.value === extremeValue)
     }
 
     // Title validator
