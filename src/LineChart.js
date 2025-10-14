@@ -21,19 +21,19 @@ export default class LineChart extends Chart {
 
     /**
      * Adds a new line to the chart.
-     * @param {string} name - The name of the line.
+     * @param {string} lineName - The name of the line.
      * @param {Array<number>} data - The data points for the line.
      */
-    addLine(name, data) {
-        this.#line[name] = [...data]
+    addLine(lineName, data) {
+        this.#line[lineName] = [...data]
     }
 
     /**
      * Removes a line from the chart.
-     * @param {string} name - The name of the line to remove.
+     * @param {string} lineName - The name of the line to remove.
      */
-    removeLine(name) {
-        delete this.#line[name]
+    removeLine(lineName) {
+        delete this.#line[lineName]
     }
 
     /**
@@ -57,13 +57,13 @@ export default class LineChart extends Chart {
         this.#validateExtremeType(type)
 
         const extremeValues = {}
-        for (const [name, data] of Object.entries(this.#line)) {
+        for (const [lineName, data] of Object.entries(this.#line)) {
             if (data.length === 0) {
-                extremeValues[name] = null
+                extremeValues[lineName] = null
             } else if (type === 'max') {
-                extremeValues[name] = Math.max(...data)
+                extremeValues[lineName] = Math.max(...data)
             } else if (type === 'min') {
-                extremeValues[name] = Math.min(...data)
+                extremeValues[lineName] = Math.min(...data)
             }
         }
         return extremeValues

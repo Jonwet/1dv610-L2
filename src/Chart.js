@@ -15,8 +15,7 @@ export default class Chart {
      * @param {string} chartTitle - The title of the chart.
      */
     constructor(chartTitle = 'Unnamed Chart') {
-        this.#validateTitle(chartTitle)
-        this.#chartTitle = chartTitle
+        this.setChartTitle(chartTitle)
         this.#data = []
     }
 
