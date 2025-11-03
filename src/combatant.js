@@ -5,4 +5,13 @@ class Combatant {
         this.defense = defense
         this.speed = speed
     }
+
+    takeDamage(amount) {
+        this.health = this.health - amount
+    }
 }
+
+const fighter = new Combatant(100, 20, 5, 10)
+console.log(fighter.health)  // 100
+fighter.takeDamage(30)
+console.log(fighter.health)  // 70
