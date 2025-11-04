@@ -17,5 +17,10 @@ export default class combatSystem {
             return b.speed - a.speed
         })
     }
+
+    calculateDamage(attacker, target) {
+        const damage = attacker.attackPower - Math.floor(target.defense / 2)
+        return Math.max(1, damage)
+    }
 }
 
