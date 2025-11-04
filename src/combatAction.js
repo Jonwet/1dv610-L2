@@ -1,4 +1,4 @@
-class combatAction {
+export default class combatAction {
     constructor(action) {
         this.id = action.id
         this.name = action.name
