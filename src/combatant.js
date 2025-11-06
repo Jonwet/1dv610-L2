@@ -13,9 +13,14 @@ export default class Combatant {
 
         // Unit status
         this.isAlive = true
+        this.isDefending = false
     }
 
     takeDamage(amount) {
+        if (this.isDefending) {
+            amount = Math.floor(amount * 0.5)
+        }
+        
         this.currentHealth = this.currentHealth - amount
 
         if (this.currentHealth <= 0) {
