@@ -14,7 +14,6 @@ export default class AIController {
             state.combatants,
             combatant,
         )
-        const allies = this.battleHelper.getAllies(state.combatants, combatant)
 
         return this.defaultAttack(enemies)
     }
