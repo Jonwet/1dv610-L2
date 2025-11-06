@@ -28,14 +28,8 @@ export default class combatSystem {
         return Math.max(1, damage)
     }
 
-    checkHit(target, action) {
-        const hitChance = action.accuracy
-
-        if (target.isDefending) {
-            hitChance = hitChance * 0.7
-        }
-
-        return Math.random() < hitChance
+    checkHit(action) {
+        return Math.random() < action.accuracy
     }
 
     executeAttack(targetId, action) {
@@ -44,7 +38,7 @@ export default class combatSystem {
             (combatant) => combatant.id === targetId,
         )
 
-        if (!this.checkHit(target, action)) {
+        if (!this.checkHit(action)) {
             return { success: true, missed: true }
         }
 
