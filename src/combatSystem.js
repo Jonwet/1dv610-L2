@@ -59,6 +59,16 @@ export default class combatSystem {
         return result
     }
 
+    executeDefend(unitId) {
+        const combatant = this.combatants.find(
+            (combatant) => combatant.id === unitId,
+        )
+
+        combatant.isDefending = true
+
+        return { success: true }
+    }
+
     getState() {
         return {
             combatants: this.combatants,
