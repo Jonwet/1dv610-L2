@@ -10,7 +10,7 @@ const fast = new combatant({
     currentHealth: 100,
     attackPower: 15,
     defense: 5,
-    speed: 20 
+    speed: 20,
 })
 
 const medium = new combatant({
@@ -21,7 +21,7 @@ const medium = new combatant({
     currentHealth: 100,
     attackPower: 15,
     defense: 5,
-    speed: 10
+    speed: 10,
 })
 
 const slow = new combatant({
@@ -32,15 +32,15 @@ const slow = new combatant({
     currentHealth: 80,
     attackPower: 20,
     defense: 8,
-    speed: 5 
+    speed: 5,
 })
 
 const basicAttack = new combatAction({
     id: 'basic',
     name: 'basic attack',
     type: 'attack',
-    accuracy: 1.0, 
-    damageMultiplier: 1.0
+    accuracy: 1.0,
+    damageMultiplier: 1.0,
 })
 
 const combat = new combatSystem()

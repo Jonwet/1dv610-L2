@@ -20,7 +20,7 @@ export default class Combatant {
         if (this.isDefending) {
             amount = Math.floor(amount * 0.5)
         }
-        
+
         this.currentHealth = this.currentHealth - amount
 
         if (this.currentHealth <= 0) {
@@ -32,7 +32,10 @@ export default class Combatant {
 
     heal(amount) {
         const oldHealth = this.currentHealth
-        this.currentHealth = Math.min(this.maxHealth, this.currentHealth + amount)
+        this.currentHealth = Math.min(
+            this.maxHealth,
+            this.currentHealth + amount,
+        )
         return this.currentHealth - oldHealth
     }
 

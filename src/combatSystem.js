@@ -40,22 +40,27 @@ export default class combatSystem {
 
     executeAttack(targetId, action) {
         const attacker = this.getCurrentCombatant()
-        const target = this.combatants.find(combatant => combatant.id === targetId)
+        const target = this.combatants.find(
+            (combatant) => combatant.id === targetId,
+        )
 
         if (!this.checkHit(target, action)) {
-            return {success: true, missed: true}
+            return { success: true, missed: true }
         }
 
         const damage = this.calculateDamage(attacker, target)
         target.takeDamage(damage)
-
 
         if (!target.isAlive) {
             // Target defeated message or something
         }
 
         //Placeholder name
-        const result = {success: true, damage: damage, targetDefeated: !target.isAlive}
+        const result = {
+            success: true,
+            damage: damage,
+            targetDefeated: !target.isAlive,
+        }
 
         return result
     }
