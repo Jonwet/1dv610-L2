@@ -59,4 +59,11 @@ export default class combatSystem {
 
         return result
     }
+
+    getState() {
+        return {
+            combatants: this.combatants,
+            currentCombatant: this.getCurrentCombatant(),
+        }
+    }
 }
