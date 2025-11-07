@@ -16,24 +16,15 @@ export default class combatSystem {
         this.#isActive = true
     }
 
-    getCurrentCombatant() {
-        return this.turnOrder[this.currentTurnIndex]
-    }
-
-    calculateDamage(attacker, target) {
-        const damage = attacker.attackPower - Math.floor(target.defense / 2)
-        return Math.max(1, damage)
-    }
-
     executeAttack(targetId, action) {
-        const attacker = this.getCurrentCombatant()
+        const attacker = this.#getCurrentCombatant()
         const target = this.#findCombatantById(targetId)
 
         if (!this.#checkHit(action)) {
             return { success: true, missed: true }
         }
 
-        const damage = this.calculateDamage(attacker, target)
+        const damage = this.#calculateDamage(attacker, target)
         target.takeDamage(damage)
 
         if (!target.isAlive) {
@@ -127,5 +118,10 @@ export default class combatSystem {
 
     #checkHit(action) {
         return Math.random() < action.accuracy
+    }
+
+    #calculateDamage(attacker, target) {
+        const damage = attacker.attackPower - Math.floor(target.defense / 2)
+        return Math.max(1, damage)
     }
 }
