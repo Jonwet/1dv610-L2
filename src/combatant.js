@@ -4,14 +4,12 @@ export default class Combatant {
         this.name = unit.name
         this.team = unit.team
 
-        // Unit stats
         this.maxHealth = unit.maxHealth || 100
         this.currentHealth = unit.currentHealth || this.maxHealth
         this.attackPower = unit.attackPower || 10
         this.defense = unit.defense || 5
         this.speed = unit.speed || 10
 
-        // Unit status
         this.isAlive = true
         this.isDefending = false
     }
