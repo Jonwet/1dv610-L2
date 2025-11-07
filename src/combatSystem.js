@@ -69,6 +69,23 @@ export default class combatSystem {
         return { success: true }
     }
 
+    nextUnitTurn() {
+        for (let attempts = 0; attempts < this.turnOrder.length; attempts++) {
+            this.currentTurnIndex++
+
+            if (this.currentTurnIndex >= this.turnOrder.length) {
+                this.currentTurnIndex = 0
+            }
+
+            const nextCombatant = this.getCurrentCombatant()
+            if (nextCombatant && nextCombatant.isAlive) {
+                nextCombatant.isDefending = false
+                return nextCombatant
+            }
+        }
+        return null
+    }
+
     getState() {
         return {
             combatants: this.combatants,
