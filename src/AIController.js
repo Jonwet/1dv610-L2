@@ -1,32 +1,34 @@
 import battleHelper from './battleHelper.js'
 
 export default class AIController {
+    #combatSystem
+    #actions
+    #battleHelper
+
     constructor(combatSystem, actions) {
-        this.combatSystem = combatSystem
-        this.actions = actions
-        this.battleHelper = new battleHelper()
+        this.#combatSystem = combatSystem
+        this.#actions = actions
+        this.#battleHelper = new battleHelper()
     }
 
     chooseAction(combatant) {
-        const state = this.combatSystem.getState()
+        const state = this.#combatSystem.getState()
 
-        const enemies = this.battleHelper.getOpponents(
+        const enemies = this.#battleHelper.getOpponents(
             state.combatants,
             combatant,
         )
 
-        return this.defaultAttack(enemies)
+        return this.#defaultAttack(enemies)
     }
 
-    defaultAttack(enemies) {
-        const aliveEnemies = enemies.filter((enemy) => enemy.isAlive)
-
-        if (aliveEnemies.length === 0) {
-            return null // null return for testing purposes
+    #defaultAttack(enemies) {
+        if (enemies.length === 0) {
+            return null
         }
 
-        const target = aliveEnemies[0]
-        const action = this.actions[0]
+        const target = enemies[0]
+        const action = this.#actions[0]
         return { action: action, target: target }
     }
 }
