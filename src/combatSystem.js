@@ -3,11 +3,13 @@ export default class combatSystem {
         this.combatants = []
         this.turnOrder = []
         this.currentTurnIndex = 0
+        this.isActive = false
     }
 
     startCombat(participants) {
         this.combatants = participants
         this.calculateTurnOrder()
+        this.isActive = true
     }
 
     calculateTurnOrder() {
@@ -86,10 +88,36 @@ export default class combatSystem {
         return null
     }
 
+    checkBattleEnd() {
+        const aliveTeams = new Set()
+        for (const combatant of this.combatants) {
+            if (combatant.isAlive) {
+                aliveTeams.add(combatant.team)
+            }
+        }
+        if (aliveTeams.size <= 1) {
+            this.isActive = false
+            let winner
+            if (aliveTeams.size === 1) {
+                const teamsArray = Array.from(aliveTeams)
+                winner = teamsArray[0]
+            } else {
+                winner = 'none'
+            }
+
+            return {
+                isOver: true,
+                winner: winner,
+            }
+        }
+        return { isOver: false }
+    }
+
     getState() {
         return {
             combatants: this.combatants,
             currentCombatant: this.getCurrentCombatant(),
+            isActive: this.isActive,
         }
     }
 }
