@@ -100,7 +100,7 @@ export default class combatSystem {
     }
 
     #calculateTurnOrder() {
-        this.turnOrder = [...this.combatants].sort((a, b) => {
+        this.#turnOrder = [...this.#combatants].sort((a, b) => {
             if (a.speed === b.speed) {
                 return Math.random() - 0.5
             }
