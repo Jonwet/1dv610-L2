@@ -15,17 +15,14 @@ export default class Combatant {
     }
 
     takeDamage(amount) {
-        if (this.isDefending) {
-            amount = Math.floor(amount * 0.5)
-        }
-
-        this.currentHealth = this.currentHealth - amount
+        const adjustedAmount = this.#adjustDamage(amount)
+        this.#applyDamage(adjustedAmount)
 
         if (this.currentHealth <= 0) {
-            this.die()
+            this.#die()
         }
 
-        return amount
+        return adjustedAmount
     }
 
     heal(amount) {
@@ -37,7 +34,18 @@ export default class Combatant {
         return this.currentHealth - oldHealth
     }
 
-    die() {
+    #adjustDamage(amount) {
+        if (this.isDefending) {
+            amount = Math.floor(amount * 0.5)
+        }
+        return amount
+    }
+
+    #applyDamage(amount) {
+        this.currentHealth = this.currentHealth - amount
+    }
+
+    #die() {
         this.isAlive = false
     }
 }
