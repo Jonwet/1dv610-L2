@@ -21,16 +21,28 @@ export default class combatSystem {
         const attacker = this.#getCurrentCombatant()
         const target = this.#findCombatantById(targetId)
 
+        if (!attacker) {
+            return { success: false }
+        }
+
+        if (!target) {
+            return { success: false }
+        }
+
+        if (!attacker.isAlive) {
+            return { success: false }
+        }
+
+        if (!target.isAlive) {
+            return { success: false }
+        }
+
         if (!this.#checkHit(action)) {
             return { success: true, missed: true }
         }
 
         const damage = this.#calculateDamage(attacker, target)
         target.takeDamage(damage)
-
-        if (!target.isAlive) {
-            // Target defeated message or something
-        }
 
         //Placeholder name
         const result = {
@@ -44,6 +56,14 @@ export default class combatSystem {
 
     executeDefend(unitId) {
         const combatant = this.#findCombatantById(unitId)
+
+        if (!combatant) {
+            return { success: false }
+        }
+
+        if (!combatant.isAlive) {
+            return { success: false }
+        }
 
         combatant.isDefending = true
 
