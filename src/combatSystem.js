@@ -3,6 +3,7 @@ export default class combatSystem {
     #turnOrder
     #currentTurnIndex
     #isActive
+
     constructor() {
         this.#combatants = []
         this.#turnOrder = []
@@ -75,14 +76,9 @@ export default class combatSystem {
         }
         if (aliveTeams.size <= 1) {
             this.#isActive = false
-            let winner
-            if (aliveTeams.size === 1) {
-                const teamsArray = Array.from(aliveTeams)
-                winner = teamsArray[0]
-            } else {
-                winner = 'none'
-            }
 
+            const winner =
+                aliveTeams.size === 1 ? Array.from(aliveTeams)[0] : 'none'
             return {
                 isOver: true,
                 winner: winner,
