@@ -1,5 +1,25 @@
 export default class Combatant {
     constructor(unit) {
+        if (!unit) {
+            throw new Error('Unit object is required to create a combatant')
+        }
+
+        if (!unit.id) {
+            throw new Error('Combatant must have an id')
+        }
+
+        if (
+            !unit.name ||
+            typeof unit.name !== 'string' ||
+            unit.name.trim() === ''
+        ) {
+            throw new Error('Combatant name must be a non-empty string')
+        }
+
+        if (!unit.team) {
+            throw new Error('Combatants must belong to a team')
+        }
+
         this.id = unit.id
         this.name = unit.name
         this.team = unit.team
@@ -15,6 +35,13 @@ export default class Combatant {
     }
 
     takeDamage(amount) {
+        if (typeof amount !== 'number') {
+            throw new Error('amount must be a number')
+        }
+
+        if (amount <= 0) {
+            throw new Error('amount must be greater than 0')
+        }
         const adjustedAmount = this.#adjustDamage(amount)
         this.#applyDamage(adjustedAmount)
 
@@ -23,15 +50,6 @@ export default class Combatant {
         }
 
         return adjustedAmount
-    }
-
-    heal(amount) {
-        const oldHealth = this.currentHealth
-        this.currentHealth = Math.min(
-            this.maxHealth,
-            this.currentHealth + amount,
-        )
-        return this.currentHealth - oldHealth
     }
 
     #adjustDamage(amount) {

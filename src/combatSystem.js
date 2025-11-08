@@ -22,19 +22,19 @@ export default class combatSystem {
         const target = this.#findCombatantById(targetId)
 
         if (!attacker) {
-            return { success: false }
+            throw new Error('No combatant found for current turn')
         }
 
         if (!target) {
-            return { success: false }
+            throw new Error(`Target ${targetId} not found`)
         }
 
         if (!attacker.isAlive) {
-            return { success: false }
+            throw new Error(`${attacker.name} is not dead`)
         }
 
         if (!target.isAlive) {
-            return { success: false }
+            throw new Error(`${target.name} is already dead`)
         }
 
         if (!this.#checkHit(action)) {
@@ -44,7 +44,6 @@ export default class combatSystem {
         const damage = this.#calculateDamage(attacker, target)
         target.takeDamage(damage)
 
-        //Placeholder name
         const result = {
             success: true,
             damage: damage,
@@ -58,11 +57,11 @@ export default class combatSystem {
         const combatant = this.#findCombatantById(unitId)
 
         if (!combatant) {
-            return { success: false }
+            throw new Error(`Combatant ${unitId} not found`)
         }
 
         if (!combatant.isAlive) {
-            return { success: false }
+            throw new Error(`${combatant.name} is dead`)
         }
 
         combatant.isDefending = true
