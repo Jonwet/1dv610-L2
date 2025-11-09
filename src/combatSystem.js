@@ -100,23 +100,19 @@ export default class CombatSystem {
     }
 
     checkBattleEnd() {
-        const aliveTeams = new Set()
-        for (const combatant of this.#combatants) {
-            if (combatant.isAlive) {
-                aliveTeams.add(combatant.team)
-            }
-        }
+        const aliveTeams = this.#getAliveTeams()
         if (aliveTeams.size <= 1) {
-            this.#isActive = false
-
-            this.#winner =
-                aliveTeams.size === 1 ? Array.from(aliveTeams)[0] : 'none'
-
-            this.#combatLogger(`Combat ended. Winner: ${this.#winner}`)
-
+            this.#endBattle(aliveTeams)
             return true
         }
         return false
+    }
+
+    #endBattle(aliveTeams) {
+        this.#isActive = false
+        this.#winner =
+            aliveTeams.size === 1 ? Array.from(aliveTeams)[0] : 'none'
+        this.#combatLogger(`Combat ended. Winner: ${this.#winner}`)
     }
 
     getWinner() {
@@ -168,5 +164,15 @@ export default class CombatSystem {
 
     #combatLogger(message) {
         this.#combatLog.push(message)
+    }
+
+    #getAliveTeams() {
+        const aliveTeams = new Set()
+        for (const combatant of this.#combatants) {
+            if (combatant.isAlive) {
+                aliveTeams.add(combatant.team)
+            }
+        }
+        return aliveTeams
     }
 }
