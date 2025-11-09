@@ -12,6 +12,10 @@ export default class combatSystem {
     }
 
     startCombat(participants) {
+        if (!Array.isArray(participants) || participants.length === 0) {
+            throw new Error('participants must be a non-empty array')
+        }
+
         this.#combatants = participants
         this.#calculateTurnOrder()
         this.#isActive = true
@@ -30,7 +34,7 @@ export default class combatSystem {
         }
 
         if (!attacker.isAlive) {
-            throw new Error(`${attacker.name} is not dead`)
+            throw new Error(`${attacker.name} is dead`)
         }
 
         if (!target.isAlive) {

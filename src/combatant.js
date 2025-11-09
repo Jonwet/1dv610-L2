@@ -35,9 +35,7 @@ export default class Combatant {
     }
 
     takeDamage(amount) {
-        if (typeof amount !== 'number') {
-            throw new Error('amount must be a number')
-        }
+        this.#validateAmountNumber(amount)
 
         if (amount <= 0) {
             throw new Error('amount must be greater than 0')
@@ -53,6 +51,7 @@ export default class Combatant {
     }
 
     #adjustDamage(amount) {
+        this.#validateAmountNumber(amount)
         if (this.isDefending) {
             amount = Math.floor(amount * 0.5)
         }
@@ -60,10 +59,17 @@ export default class Combatant {
     }
 
     #applyDamage(amount) {
+        this.#validateAmountNumber(amount)
         this.currentHealth = this.currentHealth - amount
     }
 
     #die() {
         this.isAlive = false
+    }
+
+    #validateAmountNumber(amount) {
+        if (typeof amount !== 'number') {
+            throw new Error('amount must be a number')
+        }
     }
 }

@@ -1,5 +1,3 @@
-import battleHelper from './battleHelper.js'
-
 export default class AIController {
     #combatSystem
     #actions
