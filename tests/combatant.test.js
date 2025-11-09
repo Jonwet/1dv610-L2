@@ -152,3 +152,115 @@ test('Combatant throws error if speed is invalid', () => {
         'Combatant speed must be a positive number',
     )
 })
+
+test('takeDamage reduces currentHealth by damage amount', () => {
+    const combatant = new Combatant(validUnit)
+    const damageDealt = combatant.takeDamage(30)
+
+    expect(combatant.currentHealth).toBe(70)
+    expect(damageDealt).toBe(30)
+})
+
+test('takeDamage keeps combatant alive if health remains above zero', () => {
+    const combatant = new Combatant(validUnit)
+    combatant.takeDamage(50)
+
+    expect(combatant.isAlive).toBe(true)
+    expect(combatant.currentHealth).toBe(50)
+})
+
+test('takeDamage handles multiple damage instances', () => {
+    const combatant = new Combatant(validUnit)
+    combatant.takeDamage(20)
+    combatant.takeDamage(30)
+    combatant.takeDamage(10)
+
+    expect(combatant.currentHealth).toBe(40)
+    expect(combatant.isAlive).toBe(true)
+})
+
+test('takeDamage reduces damage by 50% when defending', () => {
+    const combatant = new Combatant(validUnit)
+    combatant.isDefending = true
+    const damageDealt = combatant.takeDamage(40)
+
+    expect(damageDealt).toBe(20)
+    expect(combatant.currentHealth).toBe(80)
+})
+
+test('takeDamage floors the damage reduction when defending', () => {
+    const combatant = new Combatant(validUnit)
+    combatant.isDefending = true
+    const damageDealt = combatant.takeDamage(35)
+
+    expect(damageDealt).toBe(17)
+    expect(combatant.currentHealth).toBe(83)
+})
+
+test('takeDamage does not reduce damage when not defending', () => {
+    const combatant = new Combatant(validUnit)
+    combatant.isDefending = false
+    const damageDealt = combatant.takeDamage(40)
+
+    expect(damageDealt).toBe(40)
+    expect(combatant.currentHealth).toBe(60)
+})
+
+test('takeDamage enforces minimum 1 damage when defending', () => {
+    const combatant = new Combatant(validUnit)
+    combatant.isDefending = true
+    const damageDealt = combatant.takeDamage(1)
+
+    expect(damageDealt).toBe(1)
+    expect(combatant.currentHealth).toBe(99)
+})
+
+test('takeDamage sets isAlive to false when health reaches zero', () => {
+    const combatant = new Combatant(validUnit)
+    combatant.takeDamage(100)
+
+    expect(combatant.currentHealth).toBe(0)
+    expect(combatant.isAlive).toBe(false)
+})
+
+test('takeDamage sets isAlive to false when health goes below zero', () => {
+    const combatant = new Combatant(validUnit)
+    combatant.takeDamage(150)
+
+    expect(combatant.currentHealth).toBe(-50)
+    expect(combatant.isAlive).toBe(false)
+})
+
+test('takeDamage allows combatant to remain dead after multiple calls', () => {
+    const combatant = new Combatant(validUnit)
+    combatant.takeDamage(100)
+    expect(combatant.isAlive).toBe(false)
+
+    combatant.takeDamage(10)
+    expect(combatant.isAlive).toBe(false)
+    expect(combatant.currentHealth).toBe(-10)
+})
+
+test('takeDamage throws error for invalid amount types', () => {
+    const combatant = new Combatant(validUnit)
+
+    expect(() => combatant.takeDamage('30')).toThrow('amount must be a number')
+    expect(() => combatant.takeDamage(null)).toThrow('amount must be a number')
+    expect(() => combatant.takeDamage(undefined)).toThrow(
+        'amount must be a number',
+    )
+    expect(() => combatant.takeDamage({})).toThrow('amount must be a number')
+    expect(() => combatant.takeDamage([10])).toThrow('amount must be a number')
+    expect(() => combatant.takeDamage(NaN)).toThrow('amount must be a number')
+})
+
+test('takeDamage throws error for zero or negative amounts', () => {
+    const combatant = new Combatant(validUnit)
+
+    expect(() => combatant.takeDamage(0)).toThrow(
+        'amount must be greater than 0',
+    )
+    expect(() => combatant.takeDamage(-10)).toThrow(
+        'amount must be greater than 0',
+    )
+})
