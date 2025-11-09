@@ -4,6 +4,7 @@ export default class combatSystem {
     #currentTurn
     #isActive
     #winner
+    #combatLog
 
     constructor() {
         this.#combatants = []
@@ -11,6 +12,7 @@ export default class combatSystem {
         this.#currentTurn = 0
         this.#isActive = false
         this.#winner = null
+        this.#combatLog = []
     }
 
     startCombat(participants) {
@@ -21,6 +23,7 @@ export default class combatSystem {
         this.#combatants = participants
         this.#calculateTurnOrder()
         this.#isActive = true
+        this.#log('Combat started')
     }
 
     executeAttack(targetId, action) {
@@ -144,5 +147,9 @@ export default class combatSystem {
             attacker.attackPower -
             Math.floor(target.defense / defenseDamageReduction)
         return Math.max(1, damage) // Attacks always deal 1 damage minimum
+    }
+
+    #log(message) {
+        this.#combatLog.push(message)
     }
 }
