@@ -51,17 +51,17 @@ export default class CombatSystem {
             return 0 // 0 Damage in case of a miss
         }
 
-        const damage = this.#calculateDamage(attacker, target)
-        target.takeDamage(damage)
+        const rawDamage = this.#calculateDamage(attacker, target)
+        const actualDamage = target.takeDamage(rawDamage)
 
-        let message = `${attacker.name} hit ${target.name} for ${damage} damage`
+        let message = `${attacker.name} attacked ${target.name} for ${actualDamage} damage`
         if (!target.isAlive) {
             message += ` and defeated them`
         }
 
         this.#combatLogger(message)
 
-        return damage
+        return actualDamage
     }
 
     executeDefend(unitId) {

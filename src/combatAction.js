@@ -10,7 +10,10 @@ export default class CombatAction {
         ) {
             throw new Error('action name must be a non-empty string')
         }
-        if (typeof action.accuracy !== 'number') {
+        if (
+            typeof action.accuracy !== 'number' ||
+            Number.isNaN(action.accuracy)
+        ) {
             throw new Error('action accuracy must be a number')
         }
         if (!(action.accuracy >= 0 && action.accuracy <= 1)) {

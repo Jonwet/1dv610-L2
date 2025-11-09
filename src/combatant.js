@@ -72,7 +72,7 @@ export default class Combatant {
         if (this.isDefending) {
             amount = Math.floor(amount * defenseDamageReduction)
         }
-        return amount
+        return Math.max(1, amount)
     }
 
     #applyDamage(amount) {
@@ -85,7 +85,7 @@ export default class Combatant {
     }
 
     #validateAmountNumber(amount) {
-        if (typeof amount !== 'number') {
+        if (typeof amount !== 'number' || Number.isNaN(amount)) {
             throw new Error('amount must be a number')
         }
     }
