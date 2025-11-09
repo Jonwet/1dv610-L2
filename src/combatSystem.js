@@ -23,7 +23,7 @@ export default class combatSystem {
         this.#combatants = participants
         this.#calculateTurnOrder()
         this.#isActive = true
-        this.#log('Combat started')
+        this.#combatLogger('Combat started')
     }
 
     executeAttack(targetId, action) {
@@ -47,11 +47,19 @@ export default class combatSystem {
         }
 
         if (!this.#checkHit(action)) {
+            this.#combatLogger(`${attacker.name} missed ${target.name}`)
             return 0 // 0 Damage in case of a miss
         }
 
         const damage = this.#calculateDamage(attacker, target)
         target.takeDamage(damage)
+
+        let message = `${attacker.name} hit ${target.name} for ${damage} damage`
+        if (!target.isAlive) {
+            message += ` and defeated them`
+        }
+
+        this.#combatLogger(message)
 
         return damage
     }
@@ -68,6 +76,8 @@ export default class combatSystem {
         }
 
         combatant.isDefending = true
+
+        this.#combatLogger(`${combatant.name} is defending`)
 
         return true
     }
@@ -101,6 +111,9 @@ export default class combatSystem {
 
             this.#winner =
                 aliveTeams.size === 1 ? Array.from(aliveTeams)[0] : 'none'
+
+            this.#combatLogger(`Combat ended. Winner: ${this.#winner}`)
+
             return true
         }
         return false
@@ -116,6 +129,10 @@ export default class combatSystem {
             currentCombatant: this.#getCurrentCombatant(),
             isActive: this.#isActive,
         }
+    }
+
+    getCombatLog() {
+        return this.#combatLog
     }
 
     // Compares the speed of combatants to determine the turn order, a is the first combatant, b is the second
@@ -149,7 +166,7 @@ export default class combatSystem {
         return Math.max(1, damage) // Attacks always deal 1 damage minimum
     }
 
-    #log(message) {
+    #combatLogger(message) {
         this.#combatLog.push(message)
     }
 }
