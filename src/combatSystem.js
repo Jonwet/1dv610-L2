@@ -3,12 +3,14 @@ export default class combatSystem {
     #turnOrder
     #currentTurnIndex
     #isActive
+    #winner
 
     constructor() {
         this.#combatants = []
         this.#turnOrder = []
         this.#currentTurnIndex = 0
         this.#isActive = false
+        this.#winner = null
     }
 
     startCombat(participants) {
@@ -42,19 +44,13 @@ export default class combatSystem {
         }
 
         if (!this.#checkHit(action)) {
-            return { success: true, missed: true }
+            return 0 // 0 Damage in case of a miss
         }
 
         const damage = this.#calculateDamage(attacker, target)
         target.takeDamage(damage)
 
-        const result = {
-            success: true,
-            damage: damage,
-            targetDefeated: !target.isAlive,
-        }
-
-        return result
+        return damage
     }
 
     executeDefend(unitId) {
@@ -70,7 +66,7 @@ export default class combatSystem {
 
         combatant.isDefending = true
 
-        return { success: true }
+        return true
     }
 
     nextUnitTurn() {
@@ -100,14 +96,15 @@ export default class combatSystem {
         if (aliveTeams.size <= 1) {
             this.#isActive = false
 
-            const winner =
+            this.#winner =
                 aliveTeams.size === 1 ? Array.from(aliveTeams)[0] : 'none'
-            return {
-                isOver: true,
-                winner: winner,
-            }
+            return true
         }
-        return { isOver: false }
+        return false
+    }
+
+    getWinner() {
+        return this.#winner
     }
 
     getState() {
@@ -119,9 +116,10 @@ export default class combatSystem {
     }
 
     #calculateTurnOrder() {
+        const randomTiebreaker = 0.5
         this.#turnOrder = [...this.#combatants].sort((a, b) => {
             if (a.speed === b.speed) {
-                return Math.random() - 0.5
+                return Math.random() - randomTiebreaker
             }
             return b.speed - a.speed
         })
@@ -140,7 +138,10 @@ export default class combatSystem {
     }
 
     #calculateDamage(attacker, target) {
-        const damage = attacker.attackPower - Math.floor(target.defense / 2)
+        const defenseDamageReduction = 2
+        const damage =
+            attacker.attackPower -
+            Math.floor(target.defense / defenseDamageReduction)
         return Math.max(1, damage)
     }
 }

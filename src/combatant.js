@@ -20,15 +20,31 @@ export default class Combatant {
             throw new Error('Combatants must belong to a team')
         }
 
+        if (typeof unit.maxHealth !== 'number' || unit.maxHealth <= 0) {
+            throw new Error('Combatant maxHealth must be a positive number')
+        }
+
+        if (typeof unit.attackPower !== 'number' || unit.attackPower <= 0) {
+            throw new Error('Combatant attackPower must be a positive number')
+        }
+
+        if (typeof unit.defense !== 'number' || unit.defense < 0) {
+            throw new Error('Combatant defense must be a non-negative number')
+        }
+
+        if (typeof unit.speed !== 'number' || unit.speed <= 0) {
+            throw new Error('Combatant speed must be a positive number')
+        }
+
         this.id = unit.id
         this.name = unit.name
         this.team = unit.team
 
-        this.maxHealth = unit.maxHealth || 100
-        this.currentHealth = unit.currentHealth || this.maxHealth
-        this.attackPower = unit.attackPower || 10
-        this.defense = unit.defense || 5
-        this.speed = unit.speed || 10
+        this.maxHealth = unit.maxHealth
+        this.currentHealth = unit.currentHealth || unit.maxHealth
+        this.attackPower = unit.attackPower
+        this.defense = unit.defense
+        this.speed = unit.speed
 
         this.isAlive = true
         this.isDefending = false
@@ -52,8 +68,9 @@ export default class Combatant {
 
     #adjustDamage(amount) {
         this.#validateAmountNumber(amount)
+        const defenseDamageReduction = 0.5
         if (this.isDefending) {
-            amount = Math.floor(amount * 0.5)
+            amount = Math.floor(amount * defenseDamageReduction)
         }
         return amount
     }

@@ -18,6 +18,6 @@ export default class combatAction {
         }
 
         this.name = action.name
-        this.accuracy = action.accuracy || 0.95
+        this.accuracy = action.accuracy
     }
 }
