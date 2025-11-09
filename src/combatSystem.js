@@ -1,4 +1,4 @@
-export default class combatSystem {
+export default class CombatSystem {
     #combatants
     #turnOrder
     #currentTurn

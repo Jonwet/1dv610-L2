@@ -1,4 +1,4 @@
-export default class combatAction {
+export default class CombatAction {
     constructor(action) {
         if (!action || typeof action !== 'object') {
             throw new Error('action must be an object')
