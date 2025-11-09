@@ -1,14 +1,14 @@
 export default class combatSystem {
     #combatants
     #turnOrder
-    #currentTurnIndex
+    #currentTurn
     #isActive
     #winner
 
     constructor() {
         this.#combatants = []
         this.#turnOrder = []
-        this.#currentTurnIndex = 0
+        this.#currentTurn = 0
         this.#isActive = false
         this.#winner = null
     }
@@ -71,10 +71,10 @@ export default class combatSystem {
 
     nextUnitTurn() {
         for (let attempts = 0; attempts < this.#turnOrder.length; attempts++) {
-            this.#currentTurnIndex++
+            this.#currentTurn++
 
-            if (this.#currentTurnIndex >= this.#turnOrder.length) {
-                this.#currentTurnIndex = 0
+            if (this.#currentTurn >= this.#turnOrder.length) {
+                this.#currentTurn = 0
             }
 
             const nextCombatant = this.#getCurrentCombatant()
@@ -115,6 +115,7 @@ export default class combatSystem {
         }
     }
 
+    // Compares the speed of combatants to determine the turn order, a is the first combatant, b is the second
     #calculateTurnOrder() {
         const randomTiebreaker = 0.5
         this.#turnOrder = [...this.#combatants].sort((a, b) => {
@@ -126,7 +127,7 @@ export default class combatSystem {
     }
 
     #getCurrentCombatant() {
-        return this.#turnOrder[this.#currentTurnIndex]
+        return this.#turnOrder[this.#currentTurn]
     }
 
     #findCombatantById(id) {
@@ -142,6 +143,6 @@ export default class combatSystem {
         const damage =
             attacker.attackPower -
             Math.floor(target.defense / defenseDamageReduction)
-        return Math.max(1, damage)
+        return Math.max(1, damage) // Attacks always deal 1 damage minimum
     }
 }
