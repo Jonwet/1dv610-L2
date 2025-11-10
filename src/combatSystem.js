@@ -1,3 +1,6 @@
+/**
+ * Handles turn-based combat between combatants.
+ */
 export default class CombatSystem {
     #combatants
     #turnOrder
@@ -6,6 +9,9 @@ export default class CombatSystem {
     #winner
     #combatLog
 
+    /**
+     * Initialize an empty combat system.
+     */
     constructor() {
         this.#combatants = []
         this.#turnOrder = []
@@ -15,6 +21,12 @@ export default class CombatSystem {
         this.#combatLog = []
     }
 
+    /**
+     * Start a combat with the given participants.
+     *
+     * @param {Combatant[]} participants - Non-empty array of combatants.
+     * @throws {Error} If participants is not a non-empty array.
+     */
     startCombat(participants) {
         if (!Array.isArray(participants) || participants.length === 0) {
             throw new Error('participants must be a non-empty array')
@@ -26,6 +38,14 @@ export default class CombatSystem {
         this.#combatLogger('Combat started')
     }
 
+    /**
+     * Execute an attack from the current combatant against a target.
+     *
+     * @param {number} targetId - ID of the target combatant.
+     * @param {CombatAction} action - Action to perform.
+     * @returns {number} The damage dealt (0 if the attack missed).
+     * @throws {Error} If attacker/target not found or invalid state.
+     */
     executeAttack(targetId, action) {
         const attacker = this.#getCurrentCombatant()
         const target = this.#findCombatantById(targetId)
@@ -48,7 +68,7 @@ export default class CombatSystem {
 
         if (!this.#checkHit(action)) {
             this.#combatLogger(`${attacker.name} missed ${target.name}`)
-            return 0 // 0 Damage in case of a miss
+            return 0
         }
 
         const rawDamage = this.#calculateDamage(attacker, target)
@@ -64,6 +84,13 @@ export default class CombatSystem {
         return actualDamage
     }
 
+    /**
+     * Set a combatant to defending state, reducing next incoming damage.
+     *
+     * @param {number} unitId - ID of the combatant to defend.
+     * @returns {boolean} True on success.
+     * @throws {Error} If combatant is not found or is dead.
+     */
     executeDefend(unitId) {
         const combatant = this.#findCombatantById(unitId)
 
@@ -82,6 +109,11 @@ export default class CombatSystem {
         return true
     }
 
+    /**
+     * Advance to the next alive combatant in turn order.
+     *
+     * @returns {Combatant|null} The next combatant, or null if none are alive.
+     */
     nextUnitTurn() {
         for (let attempts = 0; attempts < this.#turnOrder.length; attempts++) {
             this.#currentTurn++
@@ -100,6 +132,12 @@ export default class CombatSystem {
         return null
     }
 
+    /**
+     * Check if the battle has ended (only one or zero teams alive).
+     * Sets internal state and winner when battle ends.
+     *
+     * @returns {boolean} True if battle ended, false otherwise.
+     */
     checkBattleEnd() {
         const aliveTeams = this.#getAliveTeams()
         if (aliveTeams.size <= 1) {
@@ -109,10 +147,20 @@ export default class CombatSystem {
         return false
     }
 
+    /**
+     * Get the winning team after battle ends.
+     *
+     * @returns {string|null} Returns team name or 'none' if no winner, else null.
+     */
     getWinner() {
         return this.#winner
     }
 
+    /**
+     * Get a snapshot of the current combat state.
+     *
+     * @returns {{combatants: Combatant[], currentCombatant: Combatant, isActive: boolean}}
+     */
     getState() {
         return {
             combatants: this.#combatants,
@@ -121,6 +169,11 @@ export default class CombatSystem {
         }
     }
 
+    /**
+     * Get the combat log messages in order.
+     *
+     * @returns {string[]} Array of log entries.
+     */
     getCombatLog() {
         return this.#combatLog
     }

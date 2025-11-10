@@ -1,4 +1,34 @@
+/**
+ * @property {number} id - Unique identifier.
+ * @property {string} name - Non-empty display name.
+ * @property {string} team - Team identifier (e.g., 'player' | 'enemy').
+ * @property {number} maxHealth - Maximum health, > 0.
+ * @property {number} attackPower - Attack power, > 0.
+ * @property {number} defense - Defense value, >= 0.
+ * @property {number} speed - Speed value, > 0.
+ * @property {number} [currentHealth] - Optional starting health; defaults to maxHealth.
+ */
+
+/**
+ * Represents a unit that can participate in combat.
+ *
+ * @property {number} id
+ * @property {string} name
+ * @property {string} team
+ * @property {number} maxHealth
+ * @property {number} currentHealth
+ * @property {number} attackPower
+ * @property {number} defense
+ * @property {number} speed
+ * @property {boolean} isAlive
+ * @property {boolean} isDefending
+ */
 export default class Combatant {
+    /**
+     * Create a combatant from a unit definition.
+     *
+     * @throws {Error} If required fields are missing or invalid.
+     */
     constructor(unit) {
         if (!unit) {
             throw new Error('Unit object is required to create a combatant')
@@ -50,6 +80,17 @@ export default class Combatant {
         this.isDefending = false
     }
 
+    /**
+     * Apply incoming damage to the combatant.
+     * Reduces currentHealth and sets isAlive to false if health drops to 0 or below.
+     *
+     * Damage is adjusted by defending state (50% reduction) and
+     * has a minimum of 1 after adjustments.
+     *
+     * @param {number} amount - Incoming damage (> 0).
+     * @returns {number} The actual damage applied after adjustments.
+     * @throws {Error} If amount is not a number or <= 0.
+     */
     takeDamage(amount) {
         this.#validateAmountNumber(amount)
 

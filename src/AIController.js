@@ -1,7 +1,16 @@
+/**
+ * Controls AI decision-making for a combatant.
+ */
 export default class AIController {
     #combatSystem
     #actions
 
+    /**
+     * Create an AI controller.
+     *
+     * @throws {Error} If combatSystem is missing.
+     * @throws {Error} If actions is missing, not an array, or empty.
+     */
     constructor(combatSystem, actions) {
         if (!combatSystem) {
             throw new Error('combatSystem is required')
@@ -23,6 +32,11 @@ export default class AIController {
         this.#actions = actions
     }
 
+    /**
+     * Choose an action and target for the provided combatant.
+     * Currently selects the first available action and the first alive enemy.
+     * @throws {Error} If combatant is missing.
+     */
     chooseAction(combatant) {
         if (!combatant) {
             throw new Error('combatant is required')
@@ -48,6 +62,6 @@ export default class AIController {
 
         const target = enemies[0]
         const action = this.#actions[0]
-        return { action: action, target: target }
+        return { action, target }
     }
 }

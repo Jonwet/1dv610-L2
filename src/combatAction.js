@@ -1,4 +1,18 @@
+/**
+ * Represents an action that can be performed in combat.
+ *
+ * @property {string} name - Action name.
+ * @property {number} accuracy - Hit chance, 0..1
+ */
 export default class CombatAction {
+    /**
+     * Create a combat action.
+     *
+     * @throws {Error} If action is missing or not an object.
+     * @throws {Error} If name is not a non-empty string.
+     * @throws {Error} If accuracy is not a number.
+     * @throws {Error} If accuracy is outside the range 0..1.
+     */
     constructor(action) {
         if (!action || typeof action !== 'object') {
             throw new Error('action must be an object')
