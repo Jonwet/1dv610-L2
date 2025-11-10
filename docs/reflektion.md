@@ -17,3 +17,27 @@ Jag är även övertydlig, enligt boken, i vissa metoder vilket bryter mot “Do
 Jag håller med boken om att man inte ska ha “söta” namn enligt regeln “Don’t be cute” eftersom att det ofta bara förvirrar andra utvecklare.
 
 Något jag också tar hänsyn till ifrån boken är att använda searchable names istället för magic numbers vilket hjälper användare av modulen att lättare hitta metoden de letar efter
+
+| Namn                            |       Fil       | Antal rader (ej ws) |                                                                                                                                                                           Reflektion                                                                                                                                                                            |
+| :------------------------------ | :-------------: | :-----------------: | :-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------: |
+| executeAttack(targetId, action) | CombatSystem.js |         ~25         | **Small!:** Enligt boken är metoden för lång då boken säger att metoder ska vara pytte små. **Do One Thing:** Metoden bryter mot regeln då den validerar, kontrollerar träff och beräknar damage. Regeln säger att en metod endast ska göra en sak. **Function Arguments:** Metoden är dyadisk (2 argument) vilket är okej men på gränsen, borde refaktorisera. |
+| nextUnitTurn                    | CombatSystem.js |         ~10         |               **Small!: Blocks and Indenting:** Som en del av Small regeln så står det att en funktion inte ska ha mer än två nivåer av indentering vilket denna metod uppfyller. **Have No Side Effects:** Metoden bryter mot regeln då den återställer isDefending state vilket kan ses som en dold funktion, borde brytas ut till egen metod.                |
+| executeDefend(unitId)           | CombatSystem.js |         ~10         |                                                                                                                         **Command Query Separation:** Metoden följer regeln då den bara ändrar state och loggar. Den returnerar inget.                                                                                                                          |
+| takeDamage(amount)              |  Combatant.js   |         ~10         |                                                                                                                    **Do One Thing:** Bryter mot regeln då den validerar input, ändrar damage, applicerar damage och kollar om combatant dör                                                                                                                     |
+| startCombat(participants)       | CombatSystem.js |         ~8          |                                                                                                    **One Level of Abstraction:** Blandar hög och låg nivå, den anropar metoder (hög nivå) och tilldelar variabelvärden (låg nivå) vilket bryter mot regeln.                                                                                                     |
+
+### Förslag på förbättringar
+
+- Refaktorisera metoder som både ändrar state och returnerar värden
+- Bryta ut validering till validerings metoder
+- Refaktorisera långa metoder som gör flera saker till många små metoder
+
+## Reflektion Kap 3
+
+Jag har svårt att se hur författaren vill att funktioner ska vara så små alltså håller jag inte med om "Small" regeln. Detta eftersom jag fortfarande är relativt ny som utvecklare så tror jag att det mest tar massa tid om man ska försöka få varenda funktion så liten som möjligt.
+
+Jag har även märkt att jag väldigt ofta blandar commands och queries inte just i denna modul utan även i mina äldre projekt.
+
+Jag tycker även att många regler går in i varandra t.ex om en metod bara gör en sak så följer den antagligen "Command query separation", detta kanske är en dålig tolkning men jag tror att om man försöker följa en regel blir det lättare att följa de flesta andra. Detta då om en metod är liten så gör den antagligen bara en sak.
+
+## Reflektion Kod kvalitet
