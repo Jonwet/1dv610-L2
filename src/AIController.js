@@ -3,11 +3,31 @@ export default class AIController {
     #actions
 
     constructor(combatSystem, actions) {
+        if (!combatSystem) {
+            throw new Error('combatSystem is required')
+        }
+
+        if (!actions) {
+            throw new Error('actions are required')
+        }
+
+        if (!Array.isArray(actions)) {
+            throw new Error('actions must be an array')
+        }
+
+        if (actions.length === 0) {
+            throw new Error('actions array cannot be empty')
+        }
+
         this.#combatSystem = combatSystem
         this.#actions = actions
     }
 
     chooseAction(combatant) {
+        if (!combatant) {
+            throw new Error('combatant is required')
+        }
+
         const state = this.#combatSystem.getState()
 
         const enemies = this.#getOpponents(state.combatants, combatant)

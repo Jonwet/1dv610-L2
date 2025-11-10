@@ -108,13 +108,6 @@ export default class CombatSystem {
         return false
     }
 
-    #endBattle(aliveTeams) {
-        this.#isActive = false
-        this.#winner =
-            aliveTeams.size === 1 ? Array.from(aliveTeams)[0] : 'none'
-        this.#combatLogger(`Combat ended. Winner: ${this.#winner}`)
-    }
-
     getWinner() {
         return this.#winner
     }
@@ -164,6 +157,13 @@ export default class CombatSystem {
 
     #combatLogger(message) {
         this.#combatLog.push(message)
+    }
+
+    #endBattle(aliveTeams) {
+        this.#isActive = false
+        this.#winner =
+            aliveTeams.size === 1 ? Array.from(aliveTeams)[0] : 'none'
+        this.#combatLogger(`Combat ended. Winner: ${this.#winner}`)
     }
 
     #getAliveTeams() {
