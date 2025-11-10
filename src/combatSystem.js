@@ -105,8 +105,6 @@ export default class CombatSystem {
         combatant.isDefending = true
 
         this.#combatLogger(`${combatant.name} is defending`)
-
-        return true
     }
 
     /**

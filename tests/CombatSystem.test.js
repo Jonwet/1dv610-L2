@@ -229,17 +229,6 @@ test('executeDefend sets combatant to defending', () => {
     expect(hero.isDefending).toBe(true)
 })
 
-test('executeDefend returns true on success', () => {
-    const combat = new CombatSystem()
-    const hero = new Combatant(validHero)
-    const enemy = new Combatant(validEnemy)
-
-    combat.startCombat([hero, enemy])
-    const result = combat.executeDefend(hero.id)
-
-    expect(result).toBe(true)
-})
-
 test('executeDefend logs defend message', () => {
     const combat = new CombatSystem()
     const hero = new Combatant(validHero)
