@@ -86,6 +86,7 @@ export default class CombatSystem {
         for (let attempts = 0; attempts < this.#turnOrder.length; attempts++) {
             this.#currentTurn++
 
+            // Starts over if at the end of the turn order
             if (this.#currentTurn >= this.#turnOrder.length) {
                 this.#currentTurn = 0
             }
