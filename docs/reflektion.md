@@ -34,10 +34,22 @@ Något jag också tar hänsyn till ifrån boken är att använda searchable name
 
 ## Reflektion Kap 3
 
-Jag har svårt att se hur författaren vill att funktioner ska vara så små alltså håller jag inte med om "Small" regeln. Detta eftersom jag fortfarande är relativt ny som utvecklare så tror jag att det mest tar massa tid om man ska försöka få varenda funktion så liten som möjligt.
+Jag har svårt att se hur författaren vill att funktioner ska vara så små alltså håller jag inte med om "Small" regeln, även fast de flesta av mina metoder är små så vill regeln att dem ska vara ännu mindre. Detta eftersom jag fortfarande är relativt ny som utvecklare så tror jag att det mest tar massa tid om man ska försöka få varenda funktion så liten som möjligt.
 
 Jag har även märkt att jag väldigt ofta blandar commands och queries inte just i denna modul utan även i mina äldre projekt.
 
 Jag tycker även att många regler går in i varandra t.ex om en metod bara gör en sak så följer den antagligen "Command query separation", detta kanske är en dålig tolkning men jag tror att om man försöker följa en regel blir det lättare att följa de flesta andra. Detta då om en metod är liten så gör den antagligen bara en sak.
 
 ## Reflektion Kod kvalitet
+
+Efter att jag läst kapitel 2 och kapitel 3 i Clean Code inser jag att jag har brister inom min namngivning och sättet jag skriver metoder på, men jag ser även några styrkor.
+
+Reglerna kring namngivning tycker jag att jag har följt relativt bra. Jag tycker att vissa av mina namn följer “Intention-revealing names” bra t.ex takeDamage och sen är jag bra på att använda verb i namnen enligt regeln. Jag följer reglerna som tipsar en om att inte använda sig utav encodings.
+
+Dock har jag brutit mot meaningful distinctions då jag använder både unit och combatant för samma koncept vilket skapar förvirring för andra utvecklare.
+
+När det kommer till reglerna från kapitel 3 så bryter jag ofta mot “Command Query Separation” vissa av mina metoder både påverkar state och returnerar data. Jag bryter även mot “Do One Thing” i vissa metoder då jag både validerar och gör beräkningar i mina metoder.
+
+En styrka är att de flesta av mina metoder är korta vilket följer “Small” regeln då jag bryter ut viss logik till privata metoder. Men å andra sidan är vissa andra av mina metoder väldigt långa och gör flera saker, detta då jag tycker det är svårt att följa regeln “Command Query Separation” som jag nämnt tidigare.
+
+Min största lärdom är att kod är ett sätt att kommunicera med andra utvecklare och inte bara instruktioner till datorn. Om min metod heter en sak men gör en annan så blir min modul väldigt jobbig att använda och andra utvecklare måste antingen ändra i min kod eller hitta en annan modul.
